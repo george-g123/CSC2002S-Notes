@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Parallel and Concurrent Programming}{2}{section.1}%
+\contentsline {section}{\numberline {2}Theory of Computation}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Finite automata}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Strings and languages}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Regular expressions}{3}{subsection.2.3}%
