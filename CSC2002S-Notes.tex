@@ -8,33 +8,41 @@
 \usepackage{subcaption,booktabs,float}
 
 \newtcolorbox{definition}[1][]{
-  colback=blue!5!white,
-  colframe=blue!75!black,
-  fonttitle=\bfseries,
-  title=Definition: #1
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title=Definition: #1
 }
 
 \newtcolorbox{warning}[1][]{
-  colback=red!5!white,
-  colframe=red!75!black,
-  fonttitle=\bfseries,
-  title=#1
+    colback=red!5!white,
+    colframe=red!75!black,
+    fonttitle=\bfseries,
+    title=#1
 }
 
 \newtcolorbox{note}[1][]{
-  colback=green!5!white,
-  colframe=green!75!black,
-  fonttitle=\bfseries,
-  title=#1,
-  breakable
+    colback=green!5!white,
+    colframe=green!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
 }
 
 \newtcolorbox{note_special}[1][]{
-  colback=orange!5!white,
-  colframe=orange!75!black,
-  fonttitle=\bfseries,
-  title=#1,
-  breakable
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{theorem}[1][0]{
+    colback=cyan!5!white,
+    colframe=cyan!75!black,
+    fonttitle=\bfseries,
+    title=Theorem: #1,
+    breakable
 }
 
 \begin{document}
@@ -108,7 +116,7 @@ We say that \textbf{$A$ is the language of $M_1 \iff M_1$ recognizes $A \iff A=L
 
 \subsection{Strings and languages}
 A \textbf{string} is a finite sequence of symbols $w_1w_2\cdots w_n\in\Sigma$. A \textbf{language} is a set of string (finite or infinite).
-The \textbf{empty string} $\epsilon$ is the string of length 0. The \textbf{empty language} $\emptyset$ is the set with no strings.
+The \textbf{empty string} $\varepsilon$ is the string of length 0. The \textbf{empty language} $\emptyset$ is the set with no strings.
 \begin{definition}[Accepting strings]
 A finite automaton $M$ \textbf{accepts string} $w=w_1w_2\cdots w_n$ for each $w_i\in\Sigma$ 
 if there exists a sequence of states $r_0,r_1,\dots,r_n\in Q$ where:
@@ -142,11 +150,11 @@ Let $A,B$ be languages.
 \begin{itemize}
     \item \textbf{Union:} $A\cup B=\{w|w\in A\text{ or }w\in B\}$.
     \item \textbf{Concatenation:} $A\circ B=\{xy|x\in A \text{ and }y\in B\}=AB$.
-    \item \textbf{Star:} $A^{\star}=\{x_1\dots x_k|x_i\in A\text{ for }k\geq 0\}$. (Note: $\epsilon\in A^{\star}$)
+    \item \textbf{Star:} $A^{\star}=\{x_1\dots x_k|x_i\in A\text{ for }k\geq 0\}$. (Note: $\varepsilon\in A^{\star}$)
 \end{itemize}
 \end{definition}
 $\quad$\\[-1em]
-Regular expressions are built from $\Sigma,\emptyset,\epsilon$ by using regular operations $\cup,\circ,\star$.
+Regular expressions are built from $\Sigma,\emptyset,\varepsilon$ by using regular operations $\cup,\circ,\star$.
 \\\\
 \textbf{Example 1:}
 \begin{itemize}
@@ -159,7 +167,212 @@ Let $A=\{\text{good, bad}\}$ and $B=\{\text{boy, girl}\}$.
 \begin{itemize}
     \item $A\cup B=\{\text{good, bad, boy, girl}\}$.
     \item $A\circ B=AB=\{\text{goodboy, goodgirl, badboy, badgirl}\}$.
-    \item $A^{\star}=\{\epsilon, \text{good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, }\dots\}$
+    \item $A^{\star}=\{\varepsilon, \text{good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, }\dots\}$
 \end{itemize}
 
+\subsection{Nondeterministic finite automata}
+\begin{definition}[Nondeterministic finite automata]
+A \textbf{nondeterministic finite automata (NFA)} $N$ is a 5-tuple $(Q,\Sigma,\delta,q_0,F)$ where
+everything is the exact same as a DFA except $\delta$. Here,
+$\delta:Q\times\Sigma_{\varepsilon} \to \mathcal{P}(Q)=\{R\hspace{2px}|\hspace{2px} R\subseteq Q\}$.
+\end{definition}
+$\quad$\\[-1em]
+New features of nondeterminism:
+\begin{itemize}
+    \item Multiple paths possible (0, 1, or many at each step)
+    \item $\varepsilon$-transition is a "free" move without reading input.
+    \item Accept input if \textbf{some} path leads to the accept state.
+\end{itemize}
+Nondeterminism doesn't correspond to a physical machine we can build. However, it if useful mathematically.
+Here are some ways to think about it:
+\begin{itemize}
+    \item \textbf{Computationally:} Fork new parallel thread and accept if any thread leads to an accept state.
+    \item \textbf{Mathematically:} Tree with branches. Accept if any branch leads to an accept state.
+    \item \textbf{Magical:} Guess at each nondeterministic step which way to go. The machine always makes the right guess that leads to the accept state, if possible.
+\end{itemize}
+\textbf{Example:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/nfa_1.png}
+\end{figure}
+$\quad$\\[-1em]
+Here, we have $\delta(q_1,a)=\{q_1, q_2\}$, but $\delta(q_1,b)=\emptyset$.
+\newpage
+\subsection{Converting NFAs to DFAs}
+\begin{note_special}[Theorem]
+If an NFA recognizes $A$, then $A$ is regular.
+\\\\
+\textbf{Proof:}\\
+Let NFA $N=(Q,\Sigma,\delta,q_0,F)$ recognize $A$. We need to construct a DFA $M=(Q',\Sigma,\delta',q_0',F')$, ignoring the $\varepsilon$-transitions.
+Here $M$ is defined as:
+\begin{itemize}
+    \item $Q'=\mathcal{P}(Q)$.
+    \item $\delta'(R\in Q',a)=q\in\delta(r,a)$ for some $r\in R$.
+    \item $q_0'=\{q_0\}$.
+    \item $F'=\{R\in Q'|R\cap F\}$.
+\end{itemize}
+\vspace{-2em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/nfa_2.png}
+\end{figure}
+\end{note_special}
+
+\subsection{Closure properties for regular languages}
+\begin{note_special}[Theorem: Closure under $\cup$.]
+If $A_1$ and $A_2$ are regular languages, then so is $A_1\cup A_2$.
+\\\\
+\textbf{Proof:}\\
+Let $M_1=(Q_1,\Sigma,\delta_1,q_1,F_1)$ recognize $A_1$ and similarly, let $M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$ recognize $A_2$.
+We need to construct $M=(Q,\Sigma,\delta,q_0,F)$ where
+\begin{itemize}
+    \item $Q=Q_1\times Q_2=\{(q_1,q_2)\hspace{2px}|\hspace{2px}q_1\in Q_1\wedge q_2\in Q_2\}$.
+    \item $q_0=(q_1,q_2)$.
+    \item $\delta((q,r),a)=\big(\delta_1(q,a),\delta_2(q,a)\big)$.
+    \item $F=(F_1\times Q_2)\times(Q_1\times F_2)$.
+\end{itemize}
+\vspace{-1.9em}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Pictures/nfa_3.png}
+\end{figure}
+\end{note_special}
+\begin{note_special}[Theorem: Closure under $\circ$.]
+If $A_1$ and $A_2$ are regular languages, then so is $A_1 A_2$.
+\\\\
+\textbf{Proof}:\\
+Let $M_1=(Q_1,\Sigma,\delta_1,q_1,F_1)$ recognize $A_1$ and similarly, let $M_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$ recognize $A_2$.
+We need to construct $M=(Q,\Sigma,\delta,q_0,F)$ where
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/nfa_4.png}
+\end{figure}
+$\quad$\\[-1em]
+$M$ should accept input $w$ if $w=xy$ where $M_1$ accepts $x$ and $M_2$ accepts $y$.
+The nondeterministic $M$ has the option to jump to $M_2$ when $M_1$ accepts.
+\end{note_special}
+
+\begin{note_special}[Theorem: Closure under $\star$]
+If $A$ is a regular language, then so is $A^{\star}$.
+\\\\
+\textbf{Proof:}\\
+Given a DFA $M$ recognizing $A$, construct an NFA $M'$ recognizing $A^{\star}$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/nfa_5.png}
+\end{figure}
+$\quad$\\[-1em]
+$M'$ should accept input $w$ if $w=x_1x_2\dots x_k$ where $k\geq 0$ and $M$ accepts each $x_i$.
+\end{note_special}
+
+\subsection{Converting a regular expression to NFA}
+\begin{note_special}[Theorem]
+If $R$ is a regular expression and $A=L(R)$, then $A$ is regular.
+\\\\
+\textbf{Proof:}\\
+Convert $R$ to the equivalent NFA $M$.
+\\\\
+If $R$ is atomic, an equivalent $M$ is:
+\begin{itemize}
+    \item $R=a$ for $a\in\Sigma$
+\begin{minipage}{\linewidth}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\linewidth]{Pictures/nfa_6.png}
+    \end{figure}
+\end{minipage}
+    \item $R=\varepsilon$
+\begin{minipage}{\linewidth}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.1\linewidth]{Pictures/nfa_7.png}
+    \end{figure}
+\end{minipage}
+    \item $R=\emptyset$
+\begin{minipage}{\linewidth}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.1\linewidth]{Pictures/nfa_8.png}
+    \end{figure}
+\end{minipage}
+\end{itemize}
+
+If $R$ is composite:
+\begin{itemize}
+    \item $R=R_1\cup R_2$
+    \item $R=R_1\circ R_2$
+    \item $R=R_1^{\star}$
+\end{itemize}
+\end{note_special}
+$\quad$\\[-1em]
+\textbf{Example:}\\
+Convert $(a\cup ab)^{\star}$ to an equivalent NFA.
+\begin{itemize}
+    \item $a$: \begin{minipage}{\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.3\linewidth]{Pictures/nfa_9.png}
+        \end{figure}
+    \end{minipage}
+
+    \item $b$: \begin{minipage}{\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.3\linewidth]{Pictures/nfa_10.png}
+        \end{figure}
+    \end{minipage}
+
+    \item $ab$: \begin{minipage}{\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\linewidth]{Pictures/nfa_11.png}
+        \end{figure}
+    \end{minipage}
+
+    \item $a\hspace{2px}\cup \hspace{2px}ab$: \begin{minipage}{\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\linewidth]{Pictures/nfa_12.png}
+        \end{figure}
+    \end{minipage}
+
+    \item $(a\hspace{2px}\cup\hspace{2px} ab)^{\star}$: \begin{minipage}{\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\linewidth]{Pictures/nfa_13.png}
+        \end{figure}
+    \end{minipage}
+\end{itemize}
+\begin{note}[Reminder]
+A $\lambda$ transition is equivalent to an $\varepsilon$ transition.
+\end{note}
+
+\subsection{Generalized NFA}
+\begin{definition}[Generalized NFA]
+A \textbf{generalized nondeterministic finite automaton (GNFA)} is similar to an NFA, but allows regular expressions as transition labels.     
+\end{definition}
+$\quad$\\[-1em]
+\textbf{Example:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/gnfa_1.png}
+\end{figure}
+$\quad$\\[-1em]
+For convenience, we will assume:
+\begin{itemize}
+    \item One accept state, separate from the start state.
+    \item One arrow from each state to each state, except
+    \begin{itemize}
+        \item only exiting the start state
+        \item only entering the accept sate
+    \end{itemize}
+\end{itemize}
+We can easily modify a GNFA to have this special form.
+
+\subsection{Converting a GNFA to a regular expression}
+\begin{note_special}[Lemma]
+Every GNFA $G$ has an equivalent regular expressions $R$.
+
+\end{note_special}
 \end{document}

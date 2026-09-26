@@ -3,3 +3,9 @@
 \contentsline {subsection}{\numberline {2.1}Finite automata}{2}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Strings and languages}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Regular expressions}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Nondeterministic finite automata}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Converting NFAs to DFAs}{5}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Closure properties for regular languages}{5}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Converting a regular expression to NFA}{6}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Generalized NFA}{8}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Converting a GNFA to a regular expression}{9}{subsection.2.9}%

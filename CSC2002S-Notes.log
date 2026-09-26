@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.1)  22 SEP 2026 07:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.1)  25 SEP 2026 14:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -592,24 +592,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (./CSC2002S-Notes.aux)
 \openout1 = `CSC2002S-Notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count358
@@ -669,7 +669,7 @@ Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks44
 \inpenc@posthook=\toks45
 )
-Package hyperref Info: Link coloring ON on input line 40.
+Package hyperref Info: Link coloring ON on input line 48.
  (./CSC2002S-Notes.out) (./CSC2002S-Notes.out)
 \@outlinefile=\write4
 \openout4 = `CSC2002S-Notes.out'.
@@ -677,10 +677,10 @@ Package hyperref Info: Link coloring ON on input line 40.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<UCT-logo.png, id=63, 356.532pt x 362.3136pt>
+<UCT-logo.png, id=87, 356.532pt x 362.3136pt>
 File: UCT-logo.png Graphic file (type png)
 <use UCT-logo.png>
-Package pdftex.def Info: UCT-logo.png  used on input line 46.
+Package pdftex.def Info: UCT-logo.png  used on input line 54.
 (pdftex.def)             Requested size: 187.89914pt x 190.95277pt.
  [1
 
@@ -692,59 +692,208 @@ Package pdftex.def Info: UCT-logo.png  used on input line 46.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.63 \newpage
+l.71 \newpage
               [1]
-<Pictures/finite_auto_2.png, id=84, 315.1775pt x 36.135pt>
+<Pictures/finite_auto_2.png, id=114, 315.1775pt x 36.135pt>
 File: Pictures/finite_auto_2.png Graphic file (type png)
 <use Pictures/finite_auto_2.png>
-Package pdftex.def Info: Pictures/finite_auto_2.png  used on input line 77.
+Package pdftex.def Info: Pictures/finite_auto_2.png  used on input line 85.
 (pdftex.def)             Requested size: 131.53845pt x 15.08064pt.
-<Pictures/finite_auto_1.png, id=85, 402.50375pt x 137.51375pt>
+<Pictures/finite_auto_1.png, id=115, 402.50375pt x 137.51375pt>
 File: Pictures/finite_auto_1.png Graphic file (type png)
 <use Pictures/finite_auto_1.png>
-Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 89.
+Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 97.
 (pdftex.def)             Requested size: 187.89914pt x 64.19502pt.
  [2{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Pictures/finite_auto_2.png (PNG copy)> <./Pictures/finite_auto_1.png (PNG copy)>]
 File: Pictures/finite_auto_1.png Graphic file (type png)
 <use Pictures/finite_auto_1.png>
-Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 128.
+Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 136.
 (pdftex.def)             Requested size: 187.89914pt x 64.19502pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--138
+Underfull \hbox (badness 10000) in paragraph at lines 138--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--138
+Underfull \hbox (badness 10000) in paragraph at lines 138--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--152
+Underfull \hbox (badness 10000) in paragraph at lines 156--160
 
  []
 
-[3] [4] (./CSC2002S-Notes.aux)
+[3]
+<Pictures/nfa_1.png, id=138, 530.98375pt x 140.525pt>
+File: Pictures/nfa_1.png Graphic file (type png)
+<use Pictures/nfa_1.png>
+Package pdftex.def Info: Pictures/nfa_1.png  used on input line 196.
+(pdftex.def)             Requested size: 234.8775pt x 62.16139pt.
+ [4 <./Pictures/nfa_1.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 203--208
+
+ []
+
+
+Underfull \hbox (badness 4024) in paragraph at lines 203--208
+\OT1/cmr/m/n/10.95 Let NFA $\OML/cmm/m/it/10.95 N \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 Q; \OT1/cmr/m/n/10.95 ^^F\OML/cmm/m/it/10.95 ; ^^N; q[]; F\OT1/cmr/m/n/10.95 )$ rec-og-nize $\OML/cmm/m/it/10.95 A$\OT1/cmr/m/n/10.95 . We need to con-struct a DFA
+ []
+
+<Pictures/nfa_2.png, id=144, 549.05125pt x 239.89626pt>
+File: Pictures/nfa_2.png Graphic file (type png)
+<use Pictures/nfa_2.png>
+Package pdftex.def Info: Pictures/nfa_2.png  used on input line 217.
+(pdftex.def)             Requested size: 219.22853pt x 95.78474pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--228
+
+ []
+
+<Pictures/nfa_3.png, id=145, 347.2975pt x 264.99pt>
+File: Pictures/nfa_3.png Graphic file (type png)
+<use Pictures/nfa_3.png>
+Package pdftex.def Info: Pictures/nfa_3.png  used on input line 237.
+(pdftex.def)             Requested size: 131.53845pt x 100.36568pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--246
+
+ []
+
+<Pictures/nfa_4.png, id=146, 511.9125pt x 191.71625pt>
+File: Pictures/nfa_4.png Graphic file (type png)
+<use Pictures/nfa_4.png>
+Package pdftex.def Info: Pictures/nfa_4.png  used on input line 249.
+(pdftex.def)             Requested size: 219.22853pt x 82.10287pt.
+[5 <./Pictures/nfa_2.png (PNG copy)> <./Pictures/nfa_3.png (PNG copy)>]
+<Pictures/nfa_5.png, id=154, 413.545pt x 238.8925pt>
+File: Pictures/nfa_5.png Graphic file (type png)
+<use Pictures/nfa_5.png>
+Package pdftex.def Info: Pictures/nfa_5.png  used on input line 263.
+(pdftex.def)             Requested size: 175.38014pt x 101.31471pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 257--264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--277
+
+ []
+
+<Pictures/nfa_6.png, id=155, 281.05pt x 83.31125pt>
+File: Pictures/nfa_6.png Graphic file (type png)
+<use Pictures/nfa_6.png>
+Package pdftex.def Info: Pictures/nfa_6.png  used on input line 282.
+(pdftex.def)             Requested size: 123.32585pt x 36.55663pt.
+
+Overfull \hbox (76.27602pt too wide) in paragraph at lines 278--285
+[]$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 a$ \OT1/cmr/m/n/10.95 for $\OML/cmm/m/it/10.95 a \OMS/cmsy/m/n/10.95 2 \OT1/cmr/m/n/10.95 ^^F$ $[]$ 
+ []
+
+<Pictures/nfa_7.png, id=156, 86.3225pt x 61.22874pt>
+File: Pictures/nfa_7.png Graphic file (type png)
+<use Pictures/nfa_7.png>
+Package pdftex.def Info: Pictures/nfa_7.png  used on input line 289.
+(pdftex.def)             Requested size: 41.1107pt x 29.16055pt.
+
+Overfull \hbox (30.53822pt too wide) in paragraph at lines 285--292
+[]$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 "$ $[]$ 
+ []
+
+<Pictures/nfa_8.png, id=157, 83.31125pt x 64.24pt>
+File: Pictures/nfa_8.png Graphic file (type png)
+<use Pictures/nfa_8.png>
+Package pdftex.def Info: Pictures/nfa_8.png  used on input line 296.
+(pdftex.def)             Requested size: 41.1107pt x 31.70038pt.
+
+Overfull \hbox (30.90706pt too wide) in paragraph at lines 292--299
+[]$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ;$ $[]$ 
+ []
+
+[6 <./Pictures/nfa_4.png (PNG copy)> <./Pictures/nfa_5.png (PNG copy)>]
+<Pictures/nfa_9.png, id=165, 207.77625pt x 66.2475pt>
+File: Pictures/nfa_9.png Graphic file (type png)
+<use Pictures/nfa_9.png>
+Package pdftex.def Info: Pictures/nfa_9.png  used on input line 315.
+(pdftex.def)             Requested size: 132.71533pt x 42.31636pt.
+
+Overfull \hbox (13.08806pt too wide) in paragraph at lines 312--318
+[]$\OML/cmm/m/it/10.95 a$\OT1/cmr/m/n/10.95 : $[]$ 
+ []
+
+<Pictures/nfa_10.png, id=166, 211.79124pt x 62.2325pt>
+File: Pictures/nfa_10.png Graphic file (type png)
+<use Pictures/nfa_10.png>
+Package pdftex.def Info: Pictures/nfa_10.png  used on input line 322.
+(pdftex.def)             Requested size: 132.71533pt x 38.99776pt.
+
+Overfull \hbox (11.99937pt too wide) in paragraph at lines 319--325
+[]$\OML/cmm/m/it/10.95 b$\OT1/cmr/m/n/10.95 : $[]$ 
+ []
+
+<Pictures/nfa_11.png, id=167, 557.08125pt x 67.25125pt>
+File: Pictures/nfa_11.png Graphic file (type png)
+<use Pictures/nfa_11.png>
+Package pdftex.def Info: Pictures/nfa_11.png  used on input line 329.
+(pdftex.def)             Requested size: 309.66461pt x 37.38336pt.
+
+Overfull \hbox (17.78743pt too wide) in paragraph at lines 326--332
+[]$\OML/cmm/m/it/10.95 ab$\OT1/cmr/m/n/10.95 : $[]$ 
+ []
+
+<Pictures/nfa_12.png, id=168, 694.595pt x 270.00874pt>
+File: Pictures/nfa_12.png Graphic file (type png)
+<use Pictures/nfa_12.png>
+Package pdftex.def Info: Pictures/nfa_12.png  used on input line 336.
+(pdftex.def)             Requested size: 309.66461pt x 120.37804pt.
+
+Overfull \hbox (34.89052pt too wide) in paragraph at lines 333--339
+[]$\OML/cmm/m/it/10.95 a  \OMS/cmsy/m/n/10.95 [  \OML/cmm/m/it/10.95 ab$\OT1/cmr/m/n/10.95 : $[]$ 
+ []
+
+<Pictures/nfa_13.png, id=169, 542.025pt x 327.2225pt>
+File: Pictures/nfa_13.png Graphic file (type png)
+<use Pictures/nfa_13.png>
+Package pdftex.def Info: Pictures/nfa_13.png  used on input line 343.
+(pdftex.def)             Requested size: 353.9053pt x 213.66074pt.
+
+Overfull \hbox (48.15727pt too wide) in paragraph at lines 340--346
+[]$\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a  \OMS/cmsy/m/n/10.95 [  \OML/cmm/m/it/10.95 ab\OT1/cmr/m/n/10.95 )[]$: $[]$ 
+ []
+
+[7 <./Pictures/nfa_6.png (PNG copy)> <./Pictures/nfa_7.png (PNG copy)> <./Pictures/nfa_8.png (PNG copy)> <./Pictures/nfa_9.png (PNG copy)> <./Pictures/nfa_10.png (PNG copy)> <./Pictures/nfa_11.png (PNG copy)> <./Pictures/nfa_12.png (PNG copy)>]
+<Pictures/gnfa_1.png, id=181, 299.1175pt x 191.71625pt>
+File: Pictures/gnfa_1.png Graphic file (type png)
+<use Pictures/gnfa_1.png>
+Package pdftex.def Info: Pictures/gnfa_1.png  used on input line 359.
+(pdftex.def)             Requested size: 187.89914pt x 120.43375pt.
+ [8 <./Pictures/nfa_13.png (PNG copy)> <./Pictures/gnfa_1.png (PNG copy)>] [9] (./CSC2002S-Notes.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `CSC2002S-Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 1A35191071B12D55196F0604859D8637;839.
+(rerunfilecheck)             Checksum: 8CAD398226D8A9546BC7D29DD0E95195;2191.
  ) 
 Here is how much of TeX's memory you used:
- 28265 strings out of 469515
- 569946 string characters out of 5470808
- 1002526 words of memory out of 5000000
- 56474 multiletter control sequences out of 15000+600000
+ 28457 strings out of 469515
+ 574092 string characters out of 5470808
+ 1003700 words of memory out of 5000000
+ 56641 multiletter control sequences out of 15000+600000
  635168 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,9n,108p,515b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on CSC2002S-Notes.pdf (5 pages, 349729 bytes).
+ 98i,9n,108p,515b,1028s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on CSC2002S-Notes.pdf (10 pages, 575720 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 212 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 262 PDF objects out of 1000 (max. 8388607)
+ 180 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 330 words of extra memory for PDF output out of 10000 (max. 10000000)
 
