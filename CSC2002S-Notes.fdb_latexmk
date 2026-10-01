@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1790339505.67084 "/home/gogy/latex-notes/CSC2002S/CSC2002S-Notes.tex" "CSC2002S-Notes.pdf" "CSC2002S-Notes" 1790339507.58375 0
-  "/home/gogy/latex-notes/CSC2002S/CSC2002S-Notes.tex" 1790339505.42587 12795 8c2befd6393fafe2787027139346e62f ""
+["pdflatex"] 1790572969.59871 "/home/gogy/latex-notes/CSC2002S/CSC2002S-Notes.tex" "CSC2002S-Notes.pdf" "CSC2002S-Notes" 1790572971.07172 0
+  "/home/gogy/latex-notes/CSC2002S/CSC2002S-Notes.tex" 1790572969.40302 17982 36578d56a692cac13f262ba78440e196 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1775415801 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1775415801 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1775415801 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -186,13 +186,15 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1775415801 43569 fd570f2fa160877d211e859f687312ba ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1780285490 5385779 47c0c393a77fd4a098bacfd57d66b88a ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780285402 2328184 7e0e41da5ebc5ea0d312feff25c751fe ""
-  "CSC2002S-Notes.aux" 1790339507.48107 1620 d08579e3c846054f36775910f28c6157 "pdflatex"
-  "CSC2002S-Notes.out" 1790339507.48307 2191 8cad398226d8a9546bc7d29dd0e95195 "pdflatex"
-  "CSC2002S-Notes.tex" 1790339505.42587 12795 8c2befd6393fafe2787027139346e62f ""
-  "CSC2002S-Notes.toc" 1790339507.48436 1006 ec3ff1726aed8cefee30091107c73207 "pdflatex"
+  "CSC2002S-Notes.aux" 1790572970.98404 2385 4d0c7ff040c2b4b82d8bdf3909f796d9 "pdflatex"
+  "CSC2002S-Notes.out" 1790572970.98404 3133 1a01bf8eb75d7fba6f856351b648b5c5 "pdflatex"
+  "CSC2002S-Notes.tex" 1790572969.40302 17982 36578d56a692cac13f262ba78440e196 ""
+  "CSC2002S-Notes.toc" 1790572970.9852 1566 2a58690bc247ae7f1f345fdf91f5adc0 "pdflatex"
   "Pictures/finite_auto_1.png" 1790052339.88736 13380 fc1f5629665e5e49e45bc6e27a7aad6f ""
   "Pictures/finite_auto_2.png" 1790053367.67979 5639 abb36cff56cce143069cb71d262fc2a6 ""
   "Pictures/gnfa_1.png" 1790153572.57886 19110 9e8e702d3137cd1d04335bb100e768da ""
+  "Pictures/gnfa_2.png" 1790568811.04067 9297 d1d2ba511af91339460799945053d3e8 ""
+  "Pictures/gnfa_3.png" 1790569199.86472 28465 6c743753731f7d32d37fab34e09e28e4 ""
   "Pictures/nfa_1.png" 1790141807.69333 15339 27827b918f43739d7e4a3546c2e866ec ""
   "Pictures/nfa_10.png" 1790152337.41836 4037 710ebcca4eb98667408431aff511f4c3 ""
   "Pictures/nfa_11.png" 1790152456.03981 6109 dc1dd8fbc0f64f9d8d0f5cdb53554aa1 ""
@@ -206,6 +208,8 @@
   "Pictures/nfa_7.png" 1790149264.1436 3715 f3a38b42157117b976ad302318b4ffc8 ""
   "Pictures/nfa_8.png" 1790149345.60285 2646 a7e9338bb8f9b688494684584ddde85c ""
   "Pictures/nfa_9.png" 1790152227.33683 4009 b969f2d4d0ec31947a9fc63e5d26e604 ""
+  "Pictures/nonr_1.png" 1790570292.08242 2420 9ac480b92e3824e9bd57e7a6dfb8a425 ""
+  "Pictures/nonr_2.png" 1790570583.15042 8625 aa95b58ebbea3f3c64c055a43c098a34 ""
   "UCT-logo.png" 1790051737.92579 191843 2674fe01acf62beedc48913726afce7a ""
   (generated)
   "CSC2002S-Notes.aux"

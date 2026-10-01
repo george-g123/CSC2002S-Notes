@@ -73,7 +73,8 @@
 \section{Parallel and Concurrent Programming}
 
 \section{Theory of Computation}
-\subsection{Finite automata}
+\subsection{Regular Languages}
+\subsubsection{Finite automata}
 \begin{definition}[Finite automata]
 A \textbf{finite automaton} is a 5-tuple $(Q,\Sigma,\delta,q_0,F)$ where:
 \begin{itemize}
@@ -114,7 +115,7 @@ The computation goes as follows:
 For example: 01101 $\to$ \textit{ACCEPT}, while 00101 $\to$ \textit{REJECT}. Here, $M_1$ accepts all string in $A$ where $A=\{w|w\text{ contains substring }11\}$.
 We say that \textbf{$A$ is the language of $M_1 \iff M_1$ recognizes $A \iff A=L(M_1)$}.
 
-\subsection{Strings and languages}
+\subsubsection{Strings and languages}
 A \textbf{string} is a finite sequence of symbols $w_1w_2\cdots w_n\in\Sigma$. A \textbf{language} is a set of string (finite or infinite).
 The \textbf{empty string} $\varepsilon$ is the string of length 0. The \textbf{empty language} $\emptyset$ is the set with no strings.
 \begin{definition}[Accepting strings]
@@ -144,7 +145,7 @@ Let $B=\{w|w\text{ has an even number of 1s}\}$. In this case, $B$ is regular. (
 \textbf{Example 3:}\\
 Let $C=\{w|w\text{ has equal number of 0s and 1s}\}$. In this case, $C$ is not regular. (provable)
 
-\subsection{Regular expressions}
+\subsubsection{Regular expressions}
 \begin{definition}[Regular operations]
 Let $A,B$ be languages.
 \begin{itemize}
@@ -170,7 +171,7 @@ Let $A=\{\text{good, bad}\}$ and $B=\{\text{boy, girl}\}$.
     \item $A^{\star}=\{\varepsilon, \text{good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, }\dots\}$
 \end{itemize}
 
-\subsection{Nondeterministic finite automata}
+\subsubsection{Nondeterministic finite automata}
 \begin{definition}[Nondeterministic finite automata]
 A \textbf{nondeterministic finite automata (NFA)} $N$ is a 5-tuple $(Q,\Sigma,\delta,q_0,F)$ where
 everything is the exact same as a DFA except $\delta$. Here,
@@ -197,8 +198,9 @@ Here are some ways to think about it:
 \end{figure}
 $\quad$\\[-1em]
 Here, we have $\delta(q_1,a)=\{q_1, q_2\}$, but $\delta(q_1,b)=\emptyset$.
+
 \newpage
-\subsection{Converting NFAs to DFAs}
+\subsubsection{Converting NFAs to DFAs}
 \begin{note_special}[Theorem]
 If an NFA recognizes $A$, then $A$ is regular.
 \\\\
@@ -218,7 +220,7 @@ Here $M$ is defined as:
 \end{figure}
 \end{note_special}
 
-\subsection{Closure properties for regular languages}
+\subsubsection{Closure properties for regular languages}
 \begin{note_special}[Theorem: Closure under $\cup$.]
 If $A_1$ and $A_2$ are regular languages, then so is $A_1\cup A_2$.
 \\\\
@@ -266,7 +268,7 @@ $\quad$\\[-1em]
 $M'$ should accept input $w$ if $w=x_1x_2\dots x_k$ where $k\geq 0$ and $M$ accepts each $x_i$.
 \end{note_special}
 
-\subsection{Converting a regular expression to NFA}
+\subsubsection{Converting a regular expression to NFA}
 \begin{note_special}[Theorem]
 If $R$ is a regular expression and $A=L(R)$, then $A$ is regular.
 \\\\
@@ -348,7 +350,7 @@ Convert $(a\cup ab)^{\star}$ to an equivalent NFA.
 A $\lambda$ transition is equivalent to an $\varepsilon$ transition.
 \end{note}
 
-\subsection{Generalized NFA}
+\subsubsection{Generalized NFA}
 \begin{definition}[Generalized NFA]
 A \textbf{generalized nondeterministic finite automaton (GNFA)} is similar to an NFA, but allows regular expressions as transition labels.     
 \end{definition}
@@ -370,9 +372,120 @@ For convenience, we will assume:
 \end{itemize}
 We can easily modify a GNFA to have this special form.
 
-\subsection{Converting a GNFA to a regular expression}
+\subsubsection{Converting a GNFA to a regular expression}
 \begin{note_special}[Lemma]
 Every GNFA $G$ has an equivalent regular expressions $R$.
-
+\\\\
+\textbf{Proof:}\\
+We will make use of an inductive argument on the number of states $k$ of $G$. For the base step ($k=2$):
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/gnfa_2.png}
+\end{figure}
+Assume the Lemma holds true for $k-1$ states. Now we want to prove it holds for $k$ states.
+The central idea is to convert a $k$-state GNFA to an equivalent ($k-1$)-state GNFA.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/gnfa_3.png}
+\end{figure}
+\begin{enumerate}
+    \item Pick any state $x$ except the start and accept states.
+    \item Remove $x$.
+    \item Repair the damage by recovering all paths that went through $x$.
+    \item Make the indicated change for each pair of states $q_i,q_j$.
+\end{enumerate}
+Thus DFAs and regular expressions are equivalent. $\rule{0.7em}{0.7em}$
 \end{note_special}
+
+\subsubsection{Non-regular languages}
+How do we show a language is not regular?
+\begin{itemize}
+    \item Remember, to show a language is \textit{regular}, we give an equivalent DFA.
+    \item To show a language is \textit{not regular}, we must give a proof.
+    \item It is not enough to say you couldn't find a DFA for it, therefore it isn't regular!
+\end{itemize}
+\textbf{Example 1:}\\
+Let $B=\{w|w\text{ has equal numbers of 0s and 1s}\}$. One's intuition syas that $B$ is not regular since DFAs cannot count unboundedly.
+\\\\
+\textbf{Example 2:}\\
+Let $C=\{w|w\text{ has equal numbers of 01 and 10 substrings}\}$. As examples, $0101\not\in C$ and $0110\in C$.
+Again, one's intuition says that $C$ is not regular since DFA cannot count unboundedly.
+However, $C$ is regular!
+
+\subsubsection{Proving non-regularity}
+\begin{note_special}[Pumping Lemma]
+For every regular language $A$, there exists a number $p$, called the "pumping length", such that if $s\in A$ and $|s|\ge p$ then $s=xyz$ where
+\begin{enumerate}
+    \item $xy^{i}z\in A$ for all $i\ge 0\quad$ ($y^{i}=\underbrace{yy\cdots y}_i$).
+    \item $y\ne\varepsilon$.
+    \item $|xy|\le p$.
+\end{enumerate}
+Informally, if $A$ is regular, then every long string in $A$ can be "pumped" and the result stays in $A$.
+\\\\
+\textbf{Proof:}\\
+Let DFA $M$ recognize $A$. Let $p$ be the number of states in $M$. Pick $s\in A$ where $|s|\ge p$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/nonr_1.png}
+\end{figure}
+
+$M$ will repeat a state $q_j$ when reading $s$ because $s$ is so long.
+The path that $M$ follows when reading $s$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/nonr_2.png}
+\end{figure}
+\end{note_special}
+$\quad$\\[-1em]
+\textbf{Exmaple 1:}\\
+Let $D=\{0^k1^k|k\ge 0\}$. Show that $D$ is not regular.
+\\\\
+Assume, for the sake of contradiction, that $D$ is regular. \\
+Since $D$ is regular, the pumping lemma must hold. Let $s=0^p1^p\in D$. \\
+The pumping lemma says that we can divide $s=xyz$. \\
+But $xyyz$ has excess 0s, and thus $xyyz\not\in D$ contradicting the pumping lemma. \\
+Therefore, our assumption is false and thus $D$ is not regular.
+
+$\quad$\\[-1em]
+\textbf{Example 2:}\\
+Let $F=\{ww|w\in\Sigma^{\star}\}$. Say $\Sigma^{\star}=\{0,1\}$. Show that $F$ is not regular.
+\\\\
+Assume, for the sake of contradiction, that $F$ is regular. \\
+Since $F$ is regular, the pumping lemma must hold. \\
+We need to choose $s\in F$. Let $s=0^p10^p1\in F$. \\
+We can show that $s=xyz$ cannot be pumped satisfying the 3 conditions. \\
+Thus, $xyyz\not\in F$, which is a contradiction. Therefore, $F$ is not regular.
+\\\\
+$\quad$\\[-1em]
+\textbf{Example 3:}\\
+Let $B=\{w|w\text{ has equal numbers of 0s and 1s}\}$. Show that $B$ is not regular.
+\\\\
+Assume, for the sake of contradiction, that $B$ is regular. \\
+We know $0^{\star}1^{\star}$ is regular, and so $B\cap 0^{\star}1^{\star}$ is regular (closure under intersection). \\
+But $D=B\cap 0^{\star}1^{\star}$ and we already showed $D$ is not regular (from example 1). \\
+Therefore, $B$ is not regular.
+
+\subsection{Context-free languages}
+\subsubsection{Context-free grammars}
+\begin{definition}[Context-free grammar]
+A \textbf{Context Free Grammar (CFG)} $G$ is a 4-tuple $(V,\Sigma,R,S)$ where
+\begin{itemize}
+    \item $V$ is the finite set of variables.
+    \item $\Sigma$ is the finite set of terminal symbols.
+    \item $R$ is the finite set of rules (rule form: $V\to (V\cup \Sigma)^{\star}$).
+    \item $S$ the starting variable.
+\end{itemize}
+For $u,v\in(V\cup\Sigma)^{\star}$ write
+\begin{enumerate}
+    \item $u\Rightarrow v$ if you can go from $u$ to $v$ with one substitution step in $G$.
+    \item $u\overset{\star}{\Rightarrow} v$ if you can go from $u$ to $v$ with some number of substitution steps in $G$. \\
+    $u\Rightarrow u_1\Rightarrow u_2\Rightarrow \cdots\Rightarrow u_k\Rightarrow v$ is called a \textit{derivation} of $v$ from $u$.
+    Furthermore, if $u=S$ then it is a \textit{derivation} of $v$.
+\end{enumerate}
+$L(G)=\{w|w\in\Sigma^{\star}\text{ and }S\overset{\star}{\Rightarrow} w\}$.
+\end{definition}
+\begin{definition}[Context-free language]
+$A$ is a \textbf{Context Free Language (CFL)} is $A=L(G)$ for some CFG $G$.
+\end{definition}
 \end{document}
