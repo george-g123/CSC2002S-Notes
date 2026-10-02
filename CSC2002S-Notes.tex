@@ -488,4 +488,114 @@ $L(G)=\{w|w\in\Sigma^{\star}\text{ and }S\overset{\star}{\Rightarrow} w\}$.
 \begin{definition}[Context-free language]
 $A$ is a \textbf{Context Free Language (CFL)} is $A=L(G)$ for some CFG $G$.
 \end{definition}
+
+\subsubsection{Ambiguity}
+Take the following two CFGs:\\
+\begin{minipage}{0.5\textwidth}
+\begin{flalign*}
+G_1& &\\
+E&\rightarrow E+T\hspace{4px}|\hspace{4px} T &\\
+T&\rightarrow T\times F\hspace{4px}|\hspace{4px} F &\\
+F&\rightarrow (E)\hspace{4px}|\hspace{4px} a
+\end{flalign*}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{flalign*}
+G_2& &\\
+E&\rightarrow E+E\hspace{4px}|\hspace{4px}E\times E\hspace{4px}|\hspace{4px}(E)\hspace{4px}|\hspace{4px}a
+\end{flalign*}
+\end{minipage}
+$\quad$\\\\[-1em]
+Both $G_1$ and $G_2$ recognize the same language, i.e. $L(G_1)=L(G_2)$.
+However, $G_1$ is an unambiguous CFG and $G_2$ is ambiguous.
+
+\subsubsection{Pushdown automaton}
+\begin{definition}[Pushdown automaton]
+A \textbf{Pushdown Automaton (PDA)} is a 6-tuple $(Q,\Sigma,\Gamma,\delta,q_0,F)$:
+\begin{itemize}
+    \item $\Sigma$ is the input alphabet.
+    \item $\Gamma$ is the stack alphabet.
+    \item $\delta:Q\times \Sigma_{\varepsilon}\times\Gamma_{\varepsilon}\rightarrow\mathcal{P}(Q\times\Gamma_{\varepsilon})$\\
+    $\delta(q,a,c)=\{(r_1,d),(r_2,e)\}$
+\end{itemize}
+We accept if some thread is in the accept state at the end of the input string.
+\end{definition}
+$\quad$\\[-1em]
+A PDA operates like an NFA except can write/add (push) or read/remove (pop) symbols from the top of the stack.
+The input appears on a tape.
+\\\\
+\textbf{Example 1:}\\
+PDA for $D=\{0^k1^k:k\ge 0\}$
+\begin{enumerate}
+    \item Read 0s from input, push 0 onto the stack until a 1 is read.
+    \item Read 1s from input, while popping 0s from the stack.
+    \item Enter the accept state if the stack is empty.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pda_1.png}
+\end{figure}
+\begin{note}[How to read transitions for PDAs]
+\textbf{Example 1:} Take the transition $\varepsilon,\hspace{2px}\varepsilon;\hspace{2px}\$$. 
+\begin{itemize}
+    \item The first $\varepsilon$ is the input read from the tape. Since we're reading $\varepsilon$, this is equivalent to a blank on the tape.
+    \item The second $\varepsilon$ is the value on the top of the stack. Since we're reading $\varepsilon$, we assume the stack is empty.
+    \item The last $\$$ is part of the stack alphabet. This signifies the bottom of the stack. We want to "push" this value onto the stack.
+\end{itemize}
+\textbf{Example 2:} Take the transition $\varepsilon,\hspace{2px}\$;\hspace{2px}\varepsilon$. 
+\begin{itemize}
+    \item The first $\varepsilon$ is the input read from the tape. Since we're reading $\varepsilon$, this is equivalent to a blank on the tape.
+    \item The $\$$ is the value we expect on the top of the stack. 
+    \item The second $\varepsilon$ is the value we push onto the stack. We're effectively replacing the bottom-of-stack character with a blank, clearing the stack.
+\end{itemize}
+\end{note}
+\textbf{Example 2:}\\
+PDA for $B=\{ww^{\mathcal{R}}:w\in\{0,1\}^{\star}\}$ with sample input: 011110.
+\begin{enumerate}
+    \item Read and push input symbols onto the stack. Non-deterministically either repeat or go to (2).
+    \item Read input symbols and pop stack symbols, and compare. If they are ever not equal, then the thread rejects.
+    \item Enter the accept state if the stack is empty.
+\end{enumerate}
+
+\subsubsection{Converting CFGs to PDAs}
+\begin{note_special}[Theorem]
+If $A$ is a CFG, then some PDA recognizes $A$.
+\\\\
+\textbf{Proof:}\\
+Convert $A$'s CFG to a PDA.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pda_2.png}
+\end{figure}
+\begin{enumerate}
+    \item Push the start symbol onto the stack.
+    \item If the top of the stack is:
+    \begin{itemize}
+        \item \textit{Variable:} replace with right hand side of rule (non-deterministic choice).
+        \item \textit{Terminal:} pop it  and match with next input symbol.
+    \end{itemize}
+    \item If the stack is empty, enter the accept state.
+\end{enumerate}
+\end{note_special}
+
+\subsubsection{Equivalence of CFGs and PDAs}
+\begin{note_special}[Theorem]
+$A$ is a CFL if and only if some PDA recognizes $A$. \textit{(Proof not examinable)}
+\end{note_special}
+
+\subsubsection{Chomsky normal form (CNF)}
+Chomsky normal form is a simplification of grammars:
+\begin{itemize}
+    \item If the start symbol is recursive, remove it.
+    \item Removing $\varepsilon$-productions.
+    \item Removing unit productions.
+    \item Removing "useless" productions.
+\end{itemize}
+\begin{note_special}[Converting to CNF]
+Given a grammar $G=\{V,T,S,P\}$, we can derive $G'=\{V,T,S',P'\}$ as follows:
+\\\\
+\textbf{Removing recursive start symbol:}\\
+Introduce a new start symbol $S'$. Let $P'$ be the production rule set $P$ of $G$ with the following rule added to it: $S'\rightarrow S$. 
+\\\\
+\end{note_special}
 \end{document}
