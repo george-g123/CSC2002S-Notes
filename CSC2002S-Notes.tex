@@ -582,6 +582,15 @@ Convert $A$'s CFG to a PDA.
 \begin{note_special}[Theorem]
 $A$ is a CFL if and only if some PDA recognizes $A$. \textit{(Proof not examinable)}
 \end{note_special}
+\begin{note_special}[Corollaries]
+\begin{enumerate}
+    \item Every regular language is a CFL.
+    \item If $A$ is a CFL and $B$ is regular, then $A\cap B$ is a CFL.
+\end{enumerate}
+\textbf{Note 1:} If $A$ and $B$ are CFLs then $A\cap B$ may not be a CFL. Therefore, the class of CFLs is not closed under $\cap$.
+\\
+\textbf{Note 2:} The class of CFL is closed under $\cup,\circ,\star$.
+\end{note_special}
 
 \subsubsection{Chomsky normal form (CNF)}
 Chomsky normal form is a simplification of grammars:
@@ -597,5 +606,97 @@ Given a grammar $G=\{V,T,S,P\}$, we can derive $G'=\{V,T,S',P'\}$ as follows:
 \textbf{Removing recursive start symbol:}\\
 Introduce a new start symbol $S'$. Let $P'$ be the production rule set $P$ of $G$ with the following rule added to it: $S'\rightarrow S$. 
 \\\\
+\textbf{Remove $\varepsilon$-productions:}\\
+If there is a production of the form $A\rightarrow\varepsilon$ then $A$ is a nullable variable.
+If $B\rightarrow A_1A_2\cdots A_n$ and $A_1A_2\cdots A_n$ are nullable variables, then $B$ is also a nullable variable.
+A given grammar $G$ can be converted into a grammar $G'$ that does not contain nullable variables.
+\begin{enumerate}
+    \item Remove each productions rule of the form $A\rightarrow\varepsilon$.
+    \item Add each rule of the form $A\rightarrow s_1s_2\cdots s_n$ with $s_i\in V\cup T$ such that each $s_i$ is not a nullable variable to $P'$.
+    \item For each production rule $A\rightarrow s_1N_1s_2N_2\cdots s_nN_n$, where each $s_i$ is not a nullable variable and $N_1,N_2,\dots,N_n$ are nullable variables, add a copy of the rule with one or more $N_i$'s replaced by $\varepsilon$ to $P'$, e.g. $A\rightarrow s_1s_2N_2\cdots s_nN_n$.
+    Note that if the $s_i$'s are also nullable, then we do not add $A\rightarrow\varepsilon$ unless $A$ is the start symbol.
+\end{enumerate}
+\textbf{Remove unit productions:}
+\begin{itemize}
+    \item Draw a dependency graph with edge $(A,B)$ for each unit production of the form $A\rightarrow B$.
+    \item From the graph, identify all $A$ $B$.
+    \item For all $A$ and $B$ identified, add a production of the form $A\rightarrow s_1\hspace{4px}|\hspace{4px}s_2\hspace{4px}|\hspace{4px}\cdots\hspace{4px}|\hspace{4px} s_n$ to $P'$ where
+    $B\rightarrow \vec{s_1\hspace{4px}|\hspace{4px}s_2\hspace{4px}|\hspace{4px}\cdots\hspace{4px}|\hspace{4px} s_n}$. Note that each $s_i\in V\cup T$ and none of the $s_i$ form unit productions.
+\end{itemize}
+\textbf{Remove useless productions:}\\
+There are essentially two types of useless productions:
+\begin{itemize}
+    \item Productions containing variables that do not terminate.
+    \item Productions containing variables that are not reachable.
+\end{itemize}
+Identify these productions are remove them from $P'$.
+\\\\
+\textbf{Correct production rule format:}\\
+A context-free grammar $G$ is in CNF, if the production rules have the following form:
+\begin{itemize}
+    \item $A\rightarrow AB$ where $A$ and $B$ are variables, or
+    \item $A\rightarrow a$ where $a$ is a single terminal.
+\end{itemize}
 \end{note_special}
+\textbf{Example:}\\
+Take the following grammar:
+\begin{flalign*}
+S&\rightarrow ASA\hspace{4px}|\hspace{4px}aB &\\
+A&\rightarrow B\hspace{4px}|\hspace{4px}S &\\
+B&\rightarrow b\hspace{4px}|\hspace{4px}\varepsilon
+\end{flalign*}
+\textbf{Step 1: Remove recursive start symbol}
+\begin{flalign*}
+S'&\rightarrow S &\\
+S&\rightarrow ASA\hspace{4px}|\hspace{4px}aB &\\
+A&\rightarrow B\hspace{4px}|\hspace{4px}S &\\
+B&\rightarrow b\hspace{4px}|\hspace{4px}\varepsilon
+\end{flalign*}
+\textbf{Step 2: Remove $\varepsilon$-productions}
+\begin{flalign*}
+S'&\rightarrow S &\\
+S&\rightarrow ASA\hspace{4px}|\hspace{4px}aB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}S\hspace{4px}|\hspace{4px}a &\\
+A&\rightarrow B\hspace{4px}|\hspace{4px}S &\\
+B&\rightarrow b
+\end{flalign*}
+\textbf{Step 3: Remove unit productions}
+\begin{flalign*}
+S'&\rightarrow ASA\hspace{4px}|\hspace{4px}aB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+S&\rightarrow ASA\hspace{4px}|\hspace{4px}aB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+A&\rightarrow b\hspace{4px}|\hspace{4px}ASA\hspace{4px}|\hspace{4px}aB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+B&\rightarrow b
+\end{flalign*}
+\textbf{Step 4: Ensure correct production rule format}
+\begin{flalign*}
+S'&\rightarrow AA1\hspace{4px}|\hspace{4px}UB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+S&\rightarrow AA1\hspace{4px}|\hspace{4px}UB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+A&\rightarrow b\hspace{4px}|\hspace{4px}AA1\hspace{4px}|\hspace{4px}UB\hspace{4px}|\hspace{4px}AS\hspace{4px}|\hspace{4px}SA\hspace{4px}|\hspace{4px}a &\\
+A1&\rightarrow SA &\\
+U&\rightarrow a &\\
+B&\rightarrow b
+\end{flalign*}
+
+\subsubsection{Proving languages are not context free}
+\begin{note_special}[Pumping Lemma for CFLs]
+For every CFL $A$, there is a $p$ such that if $s\in A$ and $|s|\ge p$ then $s=uvxyz$ where
+\begin{enumerate}
+    \item $uv^ixy^iz\in A$ for all $i\ge 0$.
+    \item $vy\neq\varepsilon$.
+    \item $|vxy|\le p$.
+\end{enumerate}
+Informally, all long string in $A$ are pumpable and stay in $A$.
+\end{note_special}
+$\quad$\\[-1em]
+\textbf{Example 1:}\\
+Let $B=\{0^k1^k2^k:k\ge 0\}$. Show that $B$ is not a CFL.
+\\\\
+Assume, for the sake of contradiction, that $B$ is a CFL.\\
+The CFL pumping lemma gives $p$ as above. Let $s=0^p1^p2^p\in B$.\\
+The pumping lemma says that we can divide $s=uvxyz$ satisfying the 3 conditions.\\
+Condition 3 ($|vxy|\le p$) implies that $vxy$ cannot contain both 0s and 2s.\\
+So $uv^2xy^2z\not\in B$, violating condition 1, which is a contradiction.\\
+Therefore, our assumption is false. We conclude that $B$ is not a CFL.
+\\\\
+\textbf{Example 2:}\\
+
 \end{document}
