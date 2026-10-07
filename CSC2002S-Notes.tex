@@ -6,6 +6,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
 \usepackage{subcaption,booktabs,float}
+\usepackage{amsmath,amssymb}
 
 \newtcolorbox{definition}[1][]{
     colback=blue!5!white,
@@ -151,24 +152,24 @@ Let $A,B$ be languages.
 \begin{itemize}
     \item \textbf{Union:} $A\cup B=\{w|w\in A\text{ or }w\in B\}$.
     \item \textbf{Concatenation:} $A\circ B=\{xy|x\in A \text{ and }y\in B\}=AB$.
-    \item \textbf{Star:} $A^{\star}=\{x_1\dots x_k|x_i\in A\text{ for }k\geq 0\}$. (Note: $\varepsilon\in A^{\star}$)
+    \item \textbf{Star:} $A^{\ast}=\{x_1\dots x_k|x_i\in A\text{ for }k\geq 0\}$. (Note: $\varepsilon\in A^{\ast}$)
 \end{itemize}
 \end{definition}
 $\quad$\\[-1em]
-Regular expressions are built from $\Sigma,\emptyset,\varepsilon$ by using regular operations $\cup,\circ,\star$.
+Regular expressions are built from $\Sigma,\emptyset,\varepsilon$ by using regular operations $\cup,\circ,\ast$.
 \\\\
 \textbf{Example 1:}
 \begin{itemize}
-    \item $(0\cup 1)^{\star}=\Sigma^{\star}$ gives all strings over $\Sigma$.
-    \item $\Sigma^{\star}1$ gives all strings that end with 1.
-    \item $\Sigma^{\star}11\Sigma^{\star}$ gives all strings that contain $11=L(M_1)$.
+    \item $(0\cup 1)^{\ast}=\Sigma^{\ast}$ gives all strings over $\Sigma$.
+    \item $\Sigma^{\ast}1$ gives all strings that end with 1.
+    \item $\Sigma^{\ast}11\Sigma^{\ast}$ gives all strings that contain $11=L(M_1)$.
 \end{itemize}
 \textbf{Example 2:}\\
 Let $A=\{\text{good, bad}\}$ and $B=\{\text{boy, girl}\}$.
 \begin{itemize}
     \item $A\cup B=\{\text{good, bad, boy, girl}\}$.
     \item $A\circ B=AB=\{\text{goodboy, goodgirl, badboy, badgirl}\}$.
-    \item $A^{\star}=\{\varepsilon, \text{good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, }\dots\}$
+    \item $A^{\ast}=\{\varepsilon, \text{good, bad, goodgood, goodbad, badgood, badbad, goodgoodgood, }\dots\}$
 \end{itemize}
 
 \subsubsection{Nondeterministic finite automata}
@@ -255,11 +256,11 @@ $M$ should accept input $w$ if $w=xy$ where $M_1$ accepts $x$ and $M_2$ accepts 
 The nondeterministic $M$ has the option to jump to $M_2$ when $M_1$ accepts.
 \end{note_special}
 
-\begin{note_special}[Theorem: Closure under $\star$]
-If $A$ is a regular language, then so is $A^{\star}$.
+\begin{note_special}[Theorem: Closure under $\ast$]
+If $A$ is a regular language, then so is $A^{\ast}$.
 \\\\
 \textbf{Proof:}\\
-Given a DFA $M$ recognizing $A$, construct an NFA $M'$ recognizing $A^{\star}$.
+Given a DFA $M$ recognizing $A$, construct an NFA $M'$ recognizing $A^{\ast}$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{Pictures/nfa_5.png}
@@ -304,12 +305,12 @@ If $R$ is composite:
 \begin{itemize}
     \item $R=R_1\cup R_2$
     \item $R=R_1\circ R_2$
-    \item $R=R_1^{\star}$
+    \item $R=R_1^{\ast}$
 \end{itemize}
 \end{note_special}
 $\quad$\\[-1em]
 \textbf{Example:}\\
-Convert $(a\cup ab)^{\star}$ to an equivalent NFA.
+Convert $(a\cup ab)^{\ast}$ to an equivalent NFA.
 \begin{itemize}
     \item $a$: \begin{minipage}{\linewidth}
         \begin{figure}[H]
@@ -339,7 +340,7 @@ Convert $(a\cup ab)^{\star}$ to an equivalent NFA.
         \end{figure}
     \end{minipage}
 
-    \item $(a\hspace{2px}\cup\hspace{2px} ab)^{\star}$: \begin{minipage}{\linewidth}
+    \item $(a\hspace{2px}\cup\hspace{2px} ab)^{\ast}$: \begin{minipage}{\linewidth}
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Pictures/nfa_13.png}
@@ -449,7 +450,7 @@ Therefore, our assumption is false and thus $D$ is not regular.
 
 $\quad$\\[-1em]
 \textbf{Example 2:}\\
-Let $F=\{ww|w\in\Sigma^{\star}\}$. Say $\Sigma^{\star}=\{0,1\}$. Show that $F$ is not regular.
+Let $F=\{ww|w\in\Sigma^{\ast}\}$. Say $\Sigma^{\ast}=\{0,1\}$. Show that $F$ is not regular.
 \\\\
 Assume, for the sake of contradiction, that $F$ is regular. \\
 Since $F$ is regular, the pumping lemma must hold. \\
@@ -457,15 +458,38 @@ We need to choose $s\in F$. Let $s=0^p10^p1\in F$. \\
 We can show that $s=xyz$ cannot be pumped satisfying the 3 conditions. \\
 Thus, $xyyz\not\in F$, which is a contradiction. Therefore, $F$ is not regular.
 \\\\
-$\quad$\\[-1em]
 \textbf{Example 3:}\\
 Let $B=\{w|w\text{ has equal numbers of 0s and 1s}\}$. Show that $B$ is not regular.
 \\\\
 Assume, for the sake of contradiction, that $B$ is regular. \\
-We know $0^{\star}1^{\star}$ is regular, and so $B\cap 0^{\star}1^{\star}$ is regular (closure under intersection). \\
-But $D=B\cap 0^{\star}1^{\star}$ and we already showed $D$ is not regular (from example 1). \\
+We know $0^{\ast}1^{\ast}$ is regular, and so $B\cap 0^{\ast}1^{\ast}$ is regular (closure under intersection). \\
+But $D=B\cap 0^{\ast}1^{\ast}$ and we already showed $D$ is not regular (from example 1). \\
 Therefore, $B$ is not regular.
-
+\\\\
+\textbf{Example 4:}\\
+Let $A=\{1^{n^2}|n\ge 0\}$. \textit{($A$ contains all strings of 1s whose length is a perfect square)}. Show that $A$ is not regular.
+\\\\
+Assume, for the sake of contradiction, that $A$ is regular.\\
+Let $p$ be the pumping length given by the pumping lemma. Take $s=1^{p^2}\in A$.\\
+The pumping lemma guarantees $s=xyz$ with $s=xy^iz\in A$ for some $i\ge 0$.\\
+Consider the two strings $xyz$ and $xy^2z$. The length of these strings differ by $y$.\\
+By contition 3, $|xy|\le p$ and thus $|y|\le p$. Then, we have $|xyz|=p^2$ and so $|xy^2z|\le p^2+p$.\\
+But $p^2+p<p^2+2p+1=(p+1)^2$.\\
+Moreover, condition 2 implies that $y$ is not the empty string and so $|xy^2z|>p^2$.\\
+Therefore, the length of $xy^2z$ lies strictly between the consecutive squares $p^2$ and $(p+1)^2$.\\
+Hence this length cannot be a perfect square itself, which is a contradiction.\\
+Thus, $xy^2z\not\in A$ and so we conclude that $A$ is not regular.
+\\\\
+\textbf{Example 5:}\\
+Let $E=\{0^i1^j|i>j\}$. Show that $E$ is not regular.
+\\\\
+Assume, for the sake of contradiction, that $E$ is regular.\\
+Let $p$ be the pumping length given by the pumping lemma. Take $s=0^{p+1}1^p\in E$.\\
+By condition 1, $xy^iz\in E$ even when $i=0$. Consider the string $xy^0z=xz$.\\
+Removing string $y$ decreases the number of 0s in $s$.\\
+But, recall that $s$ has just one more 0 than 1.\\
+Therefore, $xz$ cannot have more 0s than 1s and so $s=0^{p+1}1^p\not\in E$. \\
+Hence a contradiction. Therefore, $E$ is not regular.
 \subsection{Context-free languages}
 \subsubsection{Context-free grammars}
 \begin{definition}[Context-free grammar]
@@ -473,17 +497,17 @@ A \textbf{Context Free Grammar (CFG)} $G$ is a 4-tuple $(V,\Sigma,R,S)$ where
 \begin{itemize}
     \item $V$ is the finite set of variables.
     \item $\Sigma$ is the finite set of terminal symbols.
-    \item $R$ is the finite set of rules (rule form: $V\to (V\cup \Sigma)^{\star}$).
+    \item $R$ is the finite set of rules (rule form: $V\to (V\cup \Sigma)^{\ast}$).
     \item $S$ the starting variable.
 \end{itemize}
-For $u,v\in(V\cup\Sigma)^{\star}$ write
+For $u,v\in(V\cup\Sigma)^{\ast}$ write
 \begin{enumerate}
     \item $u\Rightarrow v$ if you can go from $u$ to $v$ with one substitution step in $G$.
-    \item $u\overset{\star}{\Rightarrow} v$ if you can go from $u$ to $v$ with some number of substitution steps in $G$. \\
+    \item $u\overset{\ast}{\Rightarrow} v$ if you can go from $u$ to $v$ with some number of substitution steps in $G$. \\
     $u\Rightarrow u_1\Rightarrow u_2\Rightarrow \cdots\Rightarrow u_k\Rightarrow v$ is called a \textit{derivation} of $v$ from $u$.
     Furthermore, if $u=S$ then it is a \textit{derivation} of $v$.
 \end{enumerate}
-$L(G)=\{w|w\in\Sigma^{\star}\text{ and }S\overset{\star}{\Rightarrow} w\}$.
+$L(G)=\{w|w\in\Sigma^{\ast}\text{ and }S\overset{\ast}{\Rightarrow} w\}$.
 \end{definition}
 \begin{definition}[Context-free language]
 $A$ is a \textbf{Context Free Language (CFL)} is $A=L(G)$ for some CFG $G$.
@@ -550,7 +574,7 @@ PDA for $D=\{0^k1^k:k\ge 0\}$
 \end{itemize}
 \end{note}
 \textbf{Example 2:}\\
-PDA for $B=\{ww^{\mathcal{R}}:w\in\{0,1\}^{\star}\}$ with sample input: 011110.
+PDA for $B=\{ww^{\mathcal{R}}:w\in\{0,1\}^{\ast}\}$ with sample input: 011110.
 \begin{enumerate}
     \item Read and push input symbols onto the stack. Non-deterministically either repeat or go to (2).
     \item Read input symbols and pop stack symbols, and compare. If they are ever not equal, then the thread rejects.
@@ -589,7 +613,7 @@ $A$ is a CFL if and only if some PDA recognizes $A$. \textit{(Proof not examinab
 \end{enumerate}
 \textbf{Note 1:} If $A$ and $B$ are CFLs then $A\cap B$ may not be a CFL. Therefore, the class of CFLs is not closed under $\cap$.
 \\
-\textbf{Note 2:} The class of CFL is closed under $\cup,\circ,\star$.
+\textbf{Note 2:} The class of CFL is closed under $\cup,\circ,\ast$.
 \end{note_special}
 
 \subsubsection{Chomsky normal form (CNF)}
@@ -688,7 +712,7 @@ Informally, all long string in $A$ are pumpable and stay in $A$.
 \end{note_special}
 $\quad$\\[-1em]
 \textbf{Example 1:}\\
-Let $B=\{0^k1^k2^k:k\ge 0\}$. Show that $B$ is not a CFL.
+Let $B=\{0^k1^k2^k|k\ge 0\}$. Show that $B$ is not a CFL.
 \\\\
 Assume, for the sake of contradiction, that $B$ is a CFL.\\
 The CFL pumping lemma gives $p$ as above. Let $s=0^p1^p2^p\in B$.\\
@@ -698,5 +722,81 @@ So $uv^2xy^2z\not\in B$, violating condition 1, which is a contradiction.\\
 Therefore, our assumption is false. We conclude that $B$ is not a CFL.
 \\\\
 \textbf{Example 2:}\\
+Let $F=\{ww|w\in\Sigma^{\ast}\}$ where $\Sigma=\{0,1\}$. Show that $F$ is not a CFL.
+\\\\
+Assum, for the sake of contradiction, that $F$ is a CFL.\\
+The CFL pumping lemma gives $p$ as above. Take $s=0^p1^p0^p1^p\in F$.\\
+Condition 3 implies that $vxy$ does not overlap two runs of 0s or two runs of 1s.\\
+Therefore, in $uv^2xy^2z$, two runs of 0s or two runds of 1s have unequal length.\\
+So $uv^2xy^2z\not\in F$ violating Condition 1, which is a contradiction.\\
+Thus, $F$ is not a CFL.
 
+\subsection{Turing Machines}
+\subsubsection{Turing machines}
+\begin{definition}[Turing machines]
+A \textbf{turing machine} $M$ is a 7-tuple $(Q,\Sigma,\Gamma,\delta,q_0,\square,F)$ where:
+\begin{itemize}
+    \item $Q$ is the set of states.
+    \item $\Sigma$ is the input alphabet \textit{(finite)}.
+    \item $\Gamma$ is the tape alphabet \textit{(finite)}.
+    \item $\delta$ is the transition function.
+    \item $q_0\in Q$ is the initial/start state.
+    \item $F\subseteq Q$ is the final state(s).
+    \item $\square\in\Gamma$ is the blank symbol.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/tm_1.png}
+\end{figure}
+\end{definition}
+$\quad$\\[-1em]
+There some conditions:
+\begin{itemize}
+    \item $\Sigma\subseteq\Gamma$, since the input is written on the tape initially.
+    \item $\square\in\Gamma\setminus\Sigma$, since the rest of the tape is blank.
+\end{itemize}
+Initially, we're in state $q_0$. The tape contains input $w$ surrounded by $\square$.
+The tape head is in the left-most cell of the input also denoted with $D$. The transitions work as follows:
+\begin{itemize}
+    \item $\delta:Q\times\Gamma\Rightarrow Q\times\Gamma\times\{L,R\}$.
+    \item $\delta(q,x)=(p,y,d)$ means that if $M$ is in state $q$ and the tape head is over symbol $x$, then $M$:
+    \begin{enumerate}
+        \item Changes state to $p$.
+        \item Replaces $x$ by $y$ on the tape.
+        \item Moves the tape head by one cell in a direction $d$ \textit{(Either left or right)}.
+    \end{enumerate}
+\end{itemize}
+
+\subsubsection{Determinism}
+A turing machine is \textbf{deterministic} if, for each $\delta(q,x)$ we have at most one move \textit{($\delta(q,x)$ could also be undefined)}.
+\\\\
+\textbf{Acceptance:}\\
+$w$ is accepted by a turing machine $M$ if $M$, when started with $w$ on the tape, eventually enters a final state. We can assume that all final states are halting, i.e. no transition is defined for them.
+\\\\
+\textbf{Rejection:}\\
+$M$ halts in non-final states. In other words, in states for which no transition is defined, or it never halts \textit{(Infinite loop)}.
+
+\subsubsection{Instantaneous descriptions}
+This is the configuration of a turing machine. It describes the current situation of the turing machine (and the tape).
+$$
+\text{ID}=\propto q\beta\text{ with }q\in Q,\propto_1,\propto_2\in\Gamma^{\ast}
+$$
+Meaning:
+\begin{itemize}
+    \item The non-blank portion of the tape contains $\propto,\beta$.
+    \item The head is on the left-most symbol of $\beta$.
+    \item The machine is in state $q$.
+\end{itemize}
+We will use $\vdash$ and $\vdash^{\ast}$ to denote the changes.
+
+\subsubsection{Language accepted by a turing machine}
+Let $M=(Q,\Sigma,\Gamma,\delta,q_0,\square,F)$ be a turing machine. Then, the language accepted by $M$ is
+$$
+L(M)=\{w\in\Sigma^{\ast}|q_0w\vdash^{\ast}\propto p\beta\text{ with }p\in F\text{ and }\propto_1\beta\in\Gamma^{\ast}\}
+$$
+The set of all languages we can accept using a turing machine is often called the recursively enumerable languages.
+Conversely, a turing machine can accept a language by halting:
+$$
+H(M)=\{w\in\Sigma|q_0q\vdash^{\ast}\propto p\beta\text{ where there is no possible move from}\propto p\beta\}
+$$
 \end{document}
