@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.12)  7 OCT 2026 17:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.12)  8 OCT 2026 12:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -700,42 +700,178 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+)) (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/cancel\cancel.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+) (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/tabularray\tabularray.sty
+Package: tabularray 2025-11-27 v2025C Typeset tabulars and arrays with LaTeX3
+ (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/ninecolors\ninecolors.sty
+Package: ninecolors 2022-02-13 v2022D Select colors with proper color contrast
+ (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xparse.sty (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2025-10-24 L3 programming layer (loader) 
+ (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count357
+))
+Package: xparse 2025-10-09 L3 Experimental document command parser
+))
+\g__tblr_nohyper_int=\count358
+\l__tblr_a_int=\count359
+\l__tblr_c_int=\count360
+\l__tblr_r_int=\count361
+\l__tblr_d_dim=\dimen309
+\l__tblr_h_dim=\dimen310
+\l__tblr_o_dim=\dimen311
+\l__tblr_p_dim=\dimen312
+\l__tblr_q_dim=\dimen313
+\l__tblr_r_dim=\dimen314
+\l__tblr_s_dim=\dimen315
+\l__tblr_t_dim=\dimen316
+\l__tblr_v_dim=\dimen317
+\l__tblr_w_dim=\dimen318
+\l__tblr_a_box=\box83
+\l__tblr_b_box=\box84
+\l__tblr_c_box=\box85
+\l__tblr_d_box=\box86
+\c@tblrcount=\count362
+\c@rownum=\count363
+\c@colnum=\count364
+\c@rowcount=\count365
+\c@colcount=\count366
+\abovesep=\dimen319
+\belowsep=\dimen320
+\leftsep=\dimen321
+\rightsep=\dimen322
+\gTblrLevelInt=\count367
+\g__tblr_data_row_key_count_int=\count368
+\g__tblr_data_column_key_count_int=\count369
+\g__tblr_data_cell_key_count_int=\count370
+\g__tblr_array_int=\count371
+\l__tblr_key_count_int=\count372
+\l__tblr_key_quotient_int=\count373
+\l__tblr_key_quotient_two_int=\count374
+\l__tblr_key_remainder_int=\count375
+\g__tblr_data_str_value_count_int=\count376
+\lTblrChildTotalInt=\count377
+\lTblrChildHtotalInt=\count378
+\lTblrChildVtotalInt=\count379
+\l__child_diff_h_int=\count380
+\l__child_diff_v_int=\count381
+\l__child_sign_h_int=\count382
+\l__child_sign_v_int=\count383
+\l__child_step_int=\count384
+\lTblrDefaultHruleWidthDim=\dimen323
+\lTblrDefaultVruleWidthDim=\dimen324
+\l__tblr_split_balance_int=\count385
+\l__tblr_strut_dp_dim=\dimen325
+\l__tblr_strut_ht_dim=\dimen326
+\g__tblr_cell_wd_dim=\dimen327
+\g__tblr_cell_ht_dim=\dimen328
+\g__tblr_cell_head_dim=\dimen329
+\g__tblr_cell_foot_dim=\dimen330
+\l__tblr_measured_cell_box=\box87
+\g__tblr_last_box=\box88
+\l__tblr_temp_box=\box89
+\l__tblr_column_target_dim=\dimen331
+\l__tblr_hfuzz_dim=\dimen332
+\l__tblr_caption_box=\box90
+\l__tblr_caption_left_box=\box91
+\lTblrRowHeadInt=\count386
+\lTblrRowFootInt=\count387
+\l__tblr_row_head_box=\box92
+\l__tblr_row_foot_box=\box93
+\l__tblr_row_head_foot_dim=\dimen333
+\lTblrTableWidthDim=\dimen334
+\l__tblr_table_firsthead_box=\box94
+\l__tblr_table_middlehead_box=\box95
+\l__tblr_table_lasthead_box=\box96
+\l__tblr_table_firstfoot_box=\box97
+\l__tblr_table_middlefoot_box=\box98
+\l__tblr_table_lastfoot_box=\box99
+\l__tblr_remain_height_dim=\dimen335
+\l__tblr_next_rows_dim=\dimen336
+\l__tblr_page_overfill_dim=\dimen337
+\l__tblr_long_from_int=\count388
+\l__tblr_long_to_int=\count389
+\l__tblr_curr_i_int=\count390
+\l__tblr_prev_i_int=\count391
+\lTblrTablePageInt=\count392
+\l__tblr_table_head_box=\box100
+\l__tblr_table_foot_box=\box101
+\l__tblr_table_head_foot_dim=\dimen338
+\l__tblr_table_head_body_foot_dim=\dimen339
+\l__tblr_table_box=\box102
+\lTblrRowFirstInt=\count393
+\lTblrRowLastInt=\count394
+\l__tblr_cover_box_a_dim=\dimen340
+\l__tblr_cover_box_b_dim=\dimen341
+\l__tblr_table_hlines_box=\box103
+\l__tblr_hline_box=\box104
+\l__tblr_row_box=\box105
+\l__tblr_col_o_wd_dim=\dimen342
+\l__tblr_col_b_wd_dim=\dimen343
+\l__tblr_hline_leftskip_dim=\dimen344
+\l__tblr_hline_rightskip_dim=\dimen345
+\l__tblr_row_ht_dim=\dimen346
+\l__tblr_row_dp_dim=\dimen347
+\l__tblr_row_abovesep_dim=\dimen348
+\l__tblr_row_belowsep_dim=\dimen349
+\l__tblr_row_vlines_box=\box106
+\l__tblr_vline_box=\box107
+\l__tblr_cell_box=\box108
+\l__tblr_row_upper_dim=\dimen350
+\l__tblr_row_lower_dim=\dimen351
+\l__tblr_row_vpace_dim=\dimen352
+\l__tblr_vline_aboveskip_dim=\dimen353
+\l__tblr_vline_belowskip_dim=\dimen354
+\lTblrCellRowSpanInt=\count395
+\lTblrCellColSpanInt=\count396
+\l__tblr_cell_wd_dim=\dimen355
+\l__tblr_cell_ht_dim=\dimen356
+\lTblrCellAboveBorderWidthDim=\dimen357
+\lTblrCellBelowBorderWidthDim=\dimen358
+\lTblrCellLeftBorderWidthDim=\dimen359
+\lTblrCellRightBorderWidthDim=\dimen360
+\l__tblr_diag_box=\box109
+\l__tblr_cell_inner_wd_dim=\dimen361
+\l__tblr_cell_inner_dp_dim=\dimen362
+\l__tblr_cell_hanchor_dim=\dimen363
+\l__tblr_last_cell_table_ht_dim=\dimen364
+\l__tblr_last_cell_table_dp_dim=\dimen365
+\l__tblr_last_vline_wd_dim=\dimen366
+\l__tblr_tikz_node_box=\box110
 ) (CSC2002S-Notes.aux)
 \openout1 = `CSC2002S-Notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
  (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count358
-\scratchdimen=\dimen309
-\scratchbox=\box83
-\nofMPsegments=\count359
-\nofMParguments=\count360
+\scratchcounter=\count397
+\scratchdimen=\dimen367
+\scratchbox=\box111
+\nofMPsegments=\count398
+\nofMParguments=\count399
 \everyMPshowfont=\toks42
-\MPscratchCnt=\count361
-\MPscratchDim=\dimen310
-\MPnumerator=\count362
-\makeMPintoPDFobject=\count363
+\MPscratchCnt=\count400
+\MPscratchDim=\dimen368
+\MPnumerator=\count401
+\makeMPintoPDFobject=\count402
 \everyMPtoPDFconversion=\toks43
 ) (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -777,13 +913,13 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count364
+\c@lstlisting=\count403
 (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks44
 \inpenc@posthook=\toks45
 )
-Package hyperref Info: Link coloring ON on input line 49.
+Package hyperref Info: Link coloring ON on input line 78.
  (CSC2002S-Notes.out) (CSC2002S-Notes.out)
 \@outlinefile=\write4
 \openout4 = `CSC2002S-Notes.out'.
@@ -791,10 +927,10 @@ Package hyperref Info: Link coloring ON on input line 49.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<UCT-logo.png, id=150, 356.532pt x 362.3136pt>
+<UCT-logo.png, id=226, 356.532pt x 362.3136pt>
 File: UCT-logo.png Graphic file (type png)
 <use UCT-logo.png>
-Package pdftex.def Info: UCT-logo.png  used on input line 55.
+Package pdftex.def Info: UCT-logo.png  used on input line 82.
 (pdftex.def)             Requested size: 187.89914pt x 190.95277pt.
  [1
 
@@ -806,370 +942,462 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
-\tf@toc=\write5
-\openout5 = `CSC2002S-Notes.toc'.
-
-
+)
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.72 \newpage
-              [1]
-<Pictures/finite_auto_2.png, id=193, 315.1775pt x 36.135pt>
+l.46 ...a turing machine}{29}{subsubsection.3.3.4}
+                                                  % [1])
+\tf@toc=\write5
+\openout5 = `CSC2002S-Notes.toc'.
+
+ [2]
+<Pictures/arch_1.png, id=292, 240.9pt x 215.30438pt>
+File: Pictures/arch_1.png Graphic file (type png)
+<use Pictures/arch_1.png>
+Package pdftex.def Info: Pictures/arch_1.png  used on input line 125.
+(pdftex.def)             Requested size: 140.92793pt x 125.95747pt.
+ [3 <./Pictures/arch_1.png>]
+<Pictures/arch_2.png, id=302, 563.85657pt x 487.8225pt>
+File: Pictures/arch_2.png Graphic file (type png)
+<use Pictures/arch_2.png>
+Package pdftex.def Info: Pictures/arch_2.png  used on input line 157.
+(pdftex.def)             Requested size: 140.92793pt x 121.92554pt.
+<Pictures/arch_3.png, id=303, 562.35094pt x 511.15968pt>
+File: Pictures/arch_3.png Graphic file (type png)
+<use Pictures/arch_3.png>
+Package pdftex.def Info: Pictures/arch_3.png  used on input line 168.
+(pdftex.def)             Requested size: 164.41711pt x 149.44925pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--169
+
+ []
+
+[4 <./Pictures/arch_2.png>]
+<Pictures/arch_4.png, id=313, 239.39438pt x 284.56313pt>
+File: Pictures/arch_4.png Graphic file (type png)
+<use Pictures/arch_4.png>
+Package pdftex.def Info: Pictures/arch_4.png  used on input line 190.
+(pdftex.def)             Requested size: 164.41711pt x 195.44127pt.
+<Pictures/arch_5.png, id=314, 469.00218pt x 341.77687pt>
+File: Pictures/arch_5.png Graphic file (type png)
+<use Pictures/arch_5.png>
+Package pdftex.def Info: Pictures/arch_5.png  used on input line 194.
+(pdftex.def)             Requested size: 328.82707pt x 239.62288pt.
+ [5 <./Pictures/arch_3.png> <./Pictures/arch_4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 206--209
+
+ []
+
+[6 <./Pictures/arch_5.png>] (C:\Users\gogy\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/10/06 1.11 listings language file
+)
+Underfull \hbox (badness 10000) in paragraph at lines 278--305
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--305
+
+ []
+
+[7] [8]
+<Pictures/arch_6.png, id=370, 456.20438pt x 271.76532pt>
+File: Pictures/arch_6.png Graphic file (type png)
+<use Pictures/arch_6.png>
+Package pdftex.def Info: Pictures/arch_6.png  used on input line 356.
+(pdftex.def)             Requested size: 234.8775pt x 139.91716pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+<Pictures/arch_7.png, id=371, 127.22531pt x 438.8897pt>
+File: Pictures/arch_7.png Graphic file (type png)
+<use Pictures/arch_7.png>
+Package pdftex.def Info: Pictures/arch_7.png  used on input line 369.
+(pdftex.def)             Requested size: 70.46037pt x 243.0777pt.
+[9 <./Pictures/arch_6.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 371--376
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--383
+
+ []
+
+<Pictures/arch_8.png, id=380, 554.82281pt x 298.11375pt>
+File: Pictures/arch_8.png Graphic file (type png)
+<use Pictures/arch_8.png>
+Package pdftex.def Info: Pictures/arch_8.png  used on input line 392.
+(pdftex.def)             Requested size: 328.82707pt x 176.68163pt.
+[10 <./Pictures/arch_7.png> <./Pictures/arch_8.png>]
+<Pictures/arch_9.png, id=396, 539.01375pt x 300.3722pt>
+File: Pictures/arch_9.png Graphic file (type png)
+<use Pictures/arch_9.png>
+Package pdftex.def Info: Pictures/arch_9.png  used on input line 406.
+(pdftex.def)             Requested size: 375.80544pt x 209.42493pt.
+<Pictures/arch_10.png, id=397, 536.0025pt x 298.86656pt>
+File: Pictures/arch_10.png Graphic file (type png)
+<use Pictures/arch_10.png>
+Package pdftex.def Info: Pictures/arch_10.png  used on input line 412.
+(pdftex.def)             Requested size: 375.80544pt x 209.54262pt.
+<Pictures/finite_auto_2.png, id=398, 315.1775pt x 36.135pt>
 File: Pictures/finite_auto_2.png Graphic file (type png)
 <use Pictures/finite_auto_2.png>
-Package pdftex.def Info: Pictures/finite_auto_2.png  used on input line 87.
+Package pdftex.def Info: Pictures/finite_auto_2.png  used on input line 436.
 (pdftex.def)             Requested size: 131.53845pt x 15.08064pt.
-<Pictures/finite_auto_1.png, id=194, 402.50375pt x 137.51375pt>
+ [11 <./Pictures/arch_9.png> <./Pictures/arch_10.png>]
+<Pictures/finite_auto_1.png, id=408, 402.50375pt x 137.51375pt>
 File: Pictures/finite_auto_1.png Graphic file (type png)
 <use Pictures/finite_auto_1.png>
-Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 99.
+Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 448.
 (pdftex.def)             Requested size: 187.89914pt x 64.19502pt.
- [2 <./Pictures/finite_auto_2.png (PNG copy)> <./Pictures/finite_auto_1.png (PNG copy)>]
+ [12 <./Pictures/finite_auto_2.png (PNG copy)> <./Pictures/finite_auto_1.png (PNG copy)>]
 File: Pictures/finite_auto_1.png Graphic file (type png)
 <use Pictures/finite_auto_1.png>
-Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 138.
+Package pdftex.def Info: Pictures/finite_auto_1.png  used on input line 487.
 (pdftex.def)             Requested size: 187.89914pt x 64.19502pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--148
+Underfull \hbox (badness 10000) in paragraph at lines 489--497
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--148
+Underfull \hbox (badness 10000) in paragraph at lines 489--497
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--162
+Underfull \hbox (badness 10000) in paragraph at lines 507--511
 
  []
 
-[3]
-<Pictures/nfa_1.png, id=217, 530.98375pt x 140.525pt>
+[13]
+<Pictures/nfa_1.png, id=427, 530.98375pt x 140.525pt>
 File: Pictures/nfa_1.png Graphic file (type png)
 <use Pictures/nfa_1.png>
-Package pdftex.def Info: Pictures/nfa_1.png  used on input line 198.
+Package pdftex.def Info: Pictures/nfa_1.png  used on input line 547.
 (pdftex.def)             Requested size: 234.8775pt x 62.16139pt.
- [4 <./Pictures/nfa_1.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 206--211
+ [14 <./Pictures/nfa_1.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 555--560
 
  []
 
 
-Underfull \hbox (badness 4024) in paragraph at lines 206--211
+Underfull \hbox (badness 4024) in paragraph at lines 555--560
 \OT1/cmr/m/n/10.95 Let NFA $\OML/cmm/m/it/10.95 N \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 Q; \OT1/cmr/m/n/10.95 ^^F\OML/cmm/m/it/10.95 ; ^^N; q[]; F\OT1/cmr/m/n/10.95 )$ rec-og-nize $\OML/cmm/m/it/10.95 A$\OT1/cmr/m/n/10.95 . We need to con-struct a DFA
  []
 
-<Pictures/nfa_2.png, id=223, 549.05125pt x 239.89626pt>
+<Pictures/nfa_2.png, id=433, 549.05125pt x 239.89626pt>
 File: Pictures/nfa_2.png Graphic file (type png)
 <use Pictures/nfa_2.png>
-Package pdftex.def Info: Pictures/nfa_2.png  used on input line 220.
+Package pdftex.def Info: Pictures/nfa_2.png  used on input line 569.
 (pdftex.def)             Requested size: 219.22853pt x 95.78474pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--231
+Underfull \hbox (badness 10000) in paragraph at lines 575--580
 
  []
 
-<Pictures/nfa_3.png, id=224, 347.2975pt x 264.99pt>
+<Pictures/nfa_3.png, id=434, 347.2975pt x 264.99pt>
 File: Pictures/nfa_3.png Graphic file (type png)
 <use Pictures/nfa_3.png>
-Package pdftex.def Info: Pictures/nfa_3.png  used on input line 240.
+Package pdftex.def Info: Pictures/nfa_3.png  used on input line 589.
 (pdftex.def)             Requested size: 131.53845pt x 100.36568pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--249
+Underfull \hbox (badness 10000) in paragraph at lines 593--598
 
  []
 
-<Pictures/nfa_4.png, id=225, 511.9125pt x 191.71625pt>
+<Pictures/nfa_4.png, id=435, 511.9125pt x 191.71625pt>
 File: Pictures/nfa_4.png Graphic file (type png)
 <use Pictures/nfa_4.png>
-Package pdftex.def Info: Pictures/nfa_4.png  used on input line 252.
+Package pdftex.def Info: Pictures/nfa_4.png  used on input line 601.
 (pdftex.def)             Requested size: 219.22853pt x 82.10287pt.
-[5 <./Pictures/nfa_2.png (PNG copy)> <./Pictures/nfa_3.png (PNG copy)>]
-<Pictures/nfa_5.png, id=233, 413.545pt x 238.8925pt>
+[15 <./Pictures/nfa_2.png (PNG copy)> <./Pictures/nfa_3.png (PNG copy)>]
+<Pictures/nfa_5.png, id=443, 413.545pt x 238.8925pt>
 File: Pictures/nfa_5.png Graphic file (type png)
 <use Pictures/nfa_5.png>
-Package pdftex.def Info: Pictures/nfa_5.png  used on input line 266.
+Package pdftex.def Info: Pictures/nfa_5.png  used on input line 615.
 (pdftex.def)             Requested size: 175.38014pt x 101.31471pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--267
+Underfull \hbox (badness 10000) in paragraph at lines 609--616
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--280
+Underfull \hbox (badness 10000) in paragraph at lines 623--629
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--280
+Underfull \hbox (badness 10000) in paragraph at lines 623--629
 
  []
 
-<Pictures/nfa_6.png, id=234, 281.05pt x 83.31125pt>
+<Pictures/nfa_6.png, id=444, 281.05pt x 83.31125pt>
 File: Pictures/nfa_6.png Graphic file (type png)
 <use Pictures/nfa_6.png>
-Package pdftex.def Info: Pictures/nfa_6.png  used on input line 285.
+Package pdftex.def Info: Pictures/nfa_6.png  used on input line 634.
 (pdftex.def)             Requested size: 123.32585pt x 36.55663pt.
 
-Overfull \hbox (76.27602pt too wide) in paragraph at lines 281--288
+Overfull \hbox (76.27602pt too wide) in paragraph at lines 630--637
 []$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 a$ \OT1/cmr/m/n/10.95 for $\OML/cmm/m/it/10.95 a \OMS/cmsy/m/n/10.95 2 \OT1/cmr/m/n/10.95 ^^F$ $[]$ 
  []
 
-<Pictures/nfa_7.png, id=235, 86.3225pt x 61.22874pt>
+<Pictures/nfa_7.png, id=445, 86.3225pt x 61.22874pt>
 File: Pictures/nfa_7.png Graphic file (type png)
 <use Pictures/nfa_7.png>
-Package pdftex.def Info: Pictures/nfa_7.png  used on input line 292.
+Package pdftex.def Info: Pictures/nfa_7.png  used on input line 641.
 (pdftex.def)             Requested size: 41.1107pt x 29.16055pt.
 
-Overfull \hbox (30.53822pt too wide) in paragraph at lines 288--295
+Overfull \hbox (30.53822pt too wide) in paragraph at lines 637--644
 []$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 "$ $[]$ 
  []
 
-<Pictures/nfa_8.png, id=236, 83.31125pt x 64.24pt>
+<Pictures/nfa_8.png, id=446, 83.31125pt x 64.24pt>
 File: Pictures/nfa_8.png Graphic file (type png)
 <use Pictures/nfa_8.png>
-Package pdftex.def Info: Pictures/nfa_8.png  used on input line 299.
+Package pdftex.def Info: Pictures/nfa_8.png  used on input line 648.
 (pdftex.def)             Requested size: 41.1107pt x 31.70038pt.
 
-Overfull \hbox (30.90706pt too wide) in paragraph at lines 295--302
+Overfull \hbox (30.90706pt too wide) in paragraph at lines 644--651
 []$\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ;$ $[]$ 
  []
 
-[6 <./Pictures/nfa_4.png (PNG copy)> <./Pictures/nfa_5.png (PNG copy)>]
-<Pictures/nfa_9.png, id=244, 207.77625pt x 66.2475pt>
+[16 <./Pictures/nfa_4.png (PNG copy)> <./Pictures/nfa_5.png (PNG copy)>]
+<Pictures/nfa_9.png, id=453, 207.77625pt x 66.2475pt>
 File: Pictures/nfa_9.png Graphic file (type png)
 <use Pictures/nfa_9.png>
-Package pdftex.def Info: Pictures/nfa_9.png  used on input line 318.
+Package pdftex.def Info: Pictures/nfa_9.png  used on input line 667.
 (pdftex.def)             Requested size: 132.71533pt x 42.31636pt.
 
-Overfull \hbox (13.08806pt too wide) in paragraph at lines 315--321
+Overfull \hbox (13.08806pt too wide) in paragraph at lines 664--670
 []$\OML/cmm/m/it/10.95 a$\OT1/cmr/m/n/10.95 : $[]$ 
  []
 
-<Pictures/nfa_10.png, id=245, 211.79124pt x 62.2325pt>
+<Pictures/nfa_10.png, id=454, 211.79124pt x 62.2325pt>
 File: Pictures/nfa_10.png Graphic file (type png)
 <use Pictures/nfa_10.png>
-Package pdftex.def Info: Pictures/nfa_10.png  used on input line 325.
+Package pdftex.def Info: Pictures/nfa_10.png  used on input line 674.
 (pdftex.def)             Requested size: 132.71533pt x 38.99776pt.
 
-Overfull \hbox (11.99937pt too wide) in paragraph at lines 322--328
+Overfull \hbox (11.99937pt too wide) in paragraph at lines 671--677
 []$\OML/cmm/m/it/10.95 b$\OT1/cmr/m/n/10.95 : $[]$ 
  []
 
-<Pictures/nfa_11.png, id=246, 557.08125pt x 67.25125pt>
+<Pictures/nfa_11.png, id=455, 557.08125pt x 67.25125pt>
 File: Pictures/nfa_11.png Graphic file (type png)
 <use Pictures/nfa_11.png>
-Package pdftex.def Info: Pictures/nfa_11.png  used on input line 332.
+Package pdftex.def Info: Pictures/nfa_11.png  used on input line 681.
 (pdftex.def)             Requested size: 309.66461pt x 37.38336pt.
 
-Overfull \hbox (17.78743pt too wide) in paragraph at lines 329--335
+Overfull \hbox (17.78743pt too wide) in paragraph at lines 678--684
 []$\OML/cmm/m/it/10.95 ab$\OT1/cmr/m/n/10.95 : $[]$ 
  []
 
-<Pictures/nfa_12.png, id=247, 694.595pt x 270.00874pt>
+<Pictures/nfa_12.png, id=456, 694.595pt x 270.00874pt>
 File: Pictures/nfa_12.png Graphic file (type png)
 <use Pictures/nfa_12.png>
-Package pdftex.def Info: Pictures/nfa_12.png  used on input line 339.
+Package pdftex.def Info: Pictures/nfa_12.png  used on input line 688.
 (pdftex.def)             Requested size: 309.66461pt x 120.37804pt.
 
-Overfull \hbox (34.89052pt too wide) in paragraph at lines 336--342
+Overfull \hbox (34.89052pt too wide) in paragraph at lines 685--691
 []$\OML/cmm/m/it/10.95 a  \OMS/cmsy/m/n/10.95 [  \OML/cmm/m/it/10.95 ab$\OT1/cmr/m/n/10.95 : $[]$ 
  []
 
-<Pictures/nfa_13.png, id=248, 542.025pt x 327.2225pt>
+<Pictures/nfa_13.png, id=457, 542.025pt x 327.2225pt>
 File: Pictures/nfa_13.png Graphic file (type png)
 <use Pictures/nfa_13.png>
-Package pdftex.def Info: Pictures/nfa_13.png  used on input line 346.
+Package pdftex.def Info: Pictures/nfa_13.png  used on input line 695.
 (pdftex.def)             Requested size: 353.9053pt x 213.66074pt.
 
-Overfull \hbox (48.15727pt too wide) in paragraph at lines 343--349
+Overfull \hbox (48.15727pt too wide) in paragraph at lines 692--698
 []$\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a  \OMS/cmsy/m/n/10.95 [  \OML/cmm/m/it/10.95 ab\OT1/cmr/m/n/10.95 )[]$: $[]$ 
  []
 
-[7 <./Pictures/nfa_6.png (PNG copy)> <./Pictures/nfa_7.png (PNG copy)> <./Pictures/nfa_8.png (PNG copy)> <./Pictures/nfa_9.png (PNG copy)> <./Pictures/nfa_10.png (PNG copy)> <./Pictures/nfa_11.png (PNG copy)> <./Pictures/nfa_12.png (PNG copy)>]
-<Pictures/gnfa_1.png, id=260, 299.1175pt x 191.71625pt>
+[17 <./Pictures/nfa_6.png (PNG copy)> <./Pictures/nfa_7.png (PNG copy)> <./Pictures/nfa_8.png (PNG copy)> <./Pictures/nfa_9.png (PNG copy)> <./Pictures/nfa_10.png (PNG copy)> <./Pictures/nfa_11.png (PNG copy)> <./Pictures/nfa_12.png (PNG copy)>]
+<Pictures/gnfa_1.png, id=469, 299.1175pt x 191.71625pt>
 File: Pictures/gnfa_1.png Graphic file (type png)
 <use Pictures/gnfa_1.png>
-Package pdftex.def Info: Pictures/gnfa_1.png  used on input line 362.
+Package pdftex.def Info: Pictures/gnfa_1.png  used on input line 711.
 (pdftex.def)             Requested size: 187.89914pt x 120.43375pt.
-<Pictures/gnfa_2.png, id=261, 478.78876pt x 128.48pt>
+<Pictures/gnfa_2.png, id=470, 478.78876pt x 128.48pt>
 File: Pictures/gnfa_2.png Graphic file (type png)
 <use Pictures/gnfa_2.png>
-Package pdftex.def Info: Pictures/gnfa_2.png  used on input line 384.
+Package pdftex.def Info: Pictures/gnfa_2.png  used on input line 733.
 (pdftex.def)             Requested size: 175.38014pt x 47.06242pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 378--385
+Underfull \hbox (badness 10000) in paragraph at lines 727--734
 
  []
 
-<Pictures/gnfa_3.png, id=262, 550.055pt x 254.9525pt>
+<Pictures/gnfa_3.png, id=471, 550.055pt x 254.9525pt>
 File: Pictures/gnfa_3.png Graphic file (type png)
 <use Pictures/gnfa_3.png>
-Package pdftex.def Info: Pictures/gnfa_3.png  used on input line 390.
+Package pdftex.def Info: Pictures/gnfa_3.png  used on input line 739.
 (pdftex.def)             Requested size: 263.07692pt x 121.9401pt.
-[8 <./Pictures/nfa_13.png (PNG copy)> <./Pictures/gnfa_1.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 408--415
+[18 <./Pictures/nfa_13.png (PNG copy)> <./Pictures/gnfa_1.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 757--764
 
  []
 
-[9 <./Pictures/gnfa_2.png (PNG copy)> <./Pictures/gnfa_3.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 424--428
+[19 <./Pictures/gnfa_2.png (PNG copy)> <./Pictures/gnfa_3.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 773--777
 
  []
 
-<Pictures/nonr_1.png, id=279, 262.9825pt x 58.2175pt>
+<Pictures/nonr_1.png, id=489, 262.9825pt x 58.2175pt>
 File: Pictures/nonr_1.png Graphic file (type png)
 <use Pictures/nonr_1.png>
-Package pdftex.def Info: Pictures/nonr_1.png  used on input line 431.
+Package pdftex.def Info: Pictures/nonr_1.png  used on input line 780.
 (pdftex.def)             Requested size: 175.38014pt x 38.82607pt.
-<Pictures/nonr_2.png, id=280, 250.9375pt x 147.55125pt>
+<Pictures/nonr_2.png, id=490, 250.9375pt x 147.55125pt>
 File: Pictures/nonr_2.png Graphic file (type png)
 <use Pictures/nonr_2.png>
-Package pdftex.def Info: Pictures/nonr_2.png  used on input line 438.
+Package pdftex.def Info: Pictures/nonr_2.png  used on input line 787.
 (pdftex.def)             Requested size: 175.38014pt x 103.12755pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 441--450
+Underfull \hbox (badness 10000) in paragraph at lines 790--799
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--493
+Underfull \hbox (badness 10000) in paragraph at lines 800--842
 
  []
 
-[10 <./Pictures/nonr_1.png (PNG copy)> <./Pictures/nonr_2.png (PNG copy)>] [11]
-Overfull \hbox (2.43332pt too wide) in paragraph at lines 517--535
+[20 <./Pictures/nonr_1.png (PNG copy)> <./Pictures/nonr_2.png (PNG copy)>] [21]
+Overfull \hbox (2.43332pt too wide) in paragraph at lines 866--884
 []$ $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--535
+Underfull \hbox (badness 10000) in paragraph at lines 866--884
 
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 547--553
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 896--902
 
  []
 
-<Pictures/pda_1.png, id=302, 491.58656pt x 198.7425pt>
+<Pictures/pda_1.png, id=511, 491.58656pt x 198.7425pt>
 File: Pictures/pda_1.png Graphic file (type png)
 <use Pictures/pda_1.png>
-Package pdftex.def Info: Pictures/pda_1.png  used on input line 560.
+Package pdftex.def Info: Pictures/pda_1.png  used on input line 909.
 (pdftex.def)             Requested size: 234.8775pt x 94.95862pt.
-[13 <./Pictures/pda_1.png>]
-<Pictures/pda_2.png, id=313, 459.96844pt x 107.65219pt>
+[23 <./Pictures/pda_1.png>]
+<Pictures/pda_2.png, id=521, 459.96844pt x 107.65219pt>
 File: Pictures/pda_2.png Graphic file (type png)
 <use Pictures/pda_2.png>
-Package pdftex.def Info: Pictures/pda_2.png  used on input line 592.
+Package pdftex.def Info: Pictures/pda_2.png  used on input line 941.
 (pdftex.def)             Requested size: 219.22853pt x 51.30943pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 586--593
+Underfull \hbox (badness 10000) in paragraph at lines 935--942
 
  []
 
-[14 <./Pictures/pda_2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 628--637
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 628--637
+[24 <./Pictures/pda_2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 977--986
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--660
-
- []
-
-[15] [16]
-
-Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 712.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 713--733
+Underfull \hbox (badness 10000) in paragraph at lines 977--986
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 713--733
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1009
+
+ []
+
+[25] [26]
+
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before break' or set page breaks manually on input line 1061.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1082
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 713--733
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1082
 
  []
 
-<Pictures/tm_1.png, id=339, 965.85844pt x 417.05812pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1082
+
+ []
+
+<Pictures/tm_1.png, id=548, 965.85844pt x 417.05812pt>
 File: Pictures/tm_1.png Graphic file (type png)
 <use Pictures/tm_1.png>
-Package pdftex.def Info: Pictures/tm_1.png  used on input line 749.
+Package pdftex.def Info: Pictures/tm_1.png  used on input line 1098.
 (pdftex.def)             Requested size: 263.07692pt x 113.59358pt.
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 771--778
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 1120--1127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 771--778
+Underfull \hbox (badness 10000) in paragraph at lines 1120--1127
 
  []
 
-[18 <./Pictures/tm_1.png>] [19] (CSC2002S-Notes.aux)
+[28 <./Pictures/tm_1.png>] [29] (CSC2002S-Notes.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
  ***********
 Package rerunfilecheck Info: File `CSC2002S-Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 69E2A2555C1CD4321E22C8B0F91333C0;5174.
+(rerunfilecheck)             Checksum: ECE5A6F2FEE750817E74BB513D4E796C;8028.
  ) 
 Here is how much of TeX's memory you used:
- 29084 strings out of 467871
- 588978 string characters out of 5418859
- 1016906 words of memory out of 5000000
- 57416 multiletter control sequences out of 15000+600000
- 636403 words of font info for 71 fonts, out of 8000000 for 9000
+ 32836 strings out of 467871
+ 677291 string characters out of 5418859
+ 1510156 words of memory out of 5000000
+ 61066 multiletter control sequences out of 15000+600000
+ 637416 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,10n,108p,529b,1028s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\gogy\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on CSC2002S-Notes.pdf (20 pages, 758879 bytes).
+ 98i,11n,108p,529b,1315s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\gogy\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti1095.pk> <C:\Users\gogy\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk> <C:\Users\gogy\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/Users/gogy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on CSC2002S-Notes.pdf (30 pages, 1087270 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
- 105 named destinations out of 1000 (max. 500000)
- 493 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 689 PDF objects out of 1000 (max. 8388607)
+ 182 named destinations out of 1000 (max. 500000)
+ 695 words of extra memory for PDF output out of 10000 (max. 10000000)
 

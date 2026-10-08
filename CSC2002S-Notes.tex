@@ -6,7 +6,10 @@
 \usepackage[most]{tcolorbox}
 \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
 \usepackage{subcaption,booktabs,float}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,cancel}
+\usepackage{listings}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
 
 \newtcolorbox{definition}[1][]{
     colback=blue!5!white,
@@ -46,9 +49,33 @@
     breakable
 }
 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    % numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
 \begin{document}
-
-
 \begin{titlepage}
     \centering
     
@@ -71,8 +98,330 @@
 \tableofcontents
 \newpage
 
+% PARALLEL AND CONCURRENT PROGRAMMING
 \section{Parallel and Concurrent Programming}
+me: where is the section, yo?\\
+yo: gurt\\
+gurt: idk
+% COMPUTER ARCHITECTURE
+\section{Computer Architecture}
+\subsection{Introduction}
+\subsubsection{What is architecture?}
+Computer architecture is a study of the overall structure and function of computer systems. In other words, how hardware components link and interact with software.
 
+\subsubsection{Assembly programming}
+A useful lens for understanding computer systems. It exposes the hardware but still (somewhat) device independent. 
+High-level languages often compile first to assembly. It maps one-to-one to machine code instructions.
+
+\subsubsection{Components of a computer}
+\begin{itemize}
+    \item The \textbf{processor} gets instructions and data from memory.
+    \item \textbf{Input} writes data from an external source to memory, and \textbf{output} reads data from memory and transmits to an external source.
+    \item \textbf{Control} sends the signals that determine the operations.
+    \item The \textbf{datapath} performs the data processing.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Pictures/arch_1.png}
+\end{figure}
+
+\subsubsection{Measuring performance}
+The performance equation:
+$$
+\boxed{\text{Runtime}=\text{IC}\times\text{CPI}\times\text{Clock Cycle Time}}
+$$
+where:
+\begin{itemize}
+    \item $\text{IC}$ is the instruction count, i.e. the total number of instructions in the program.
+    \item $\text{CPI}$ is the number of cycles per instruction, i.e. the average number of clock cycles required for an instruction.
+    \item $\text{Clock Cycle Time}=\frac{1}{\text{Clock Rate}}$ is the time for one processor clock period.
+\end{itemize}
+This is an approximation of the actual measured runtime, but reasonably accurate.
+
+\subsubsection{Performance fallacies}
+Using a subset of the performance equation is problematic. The clock rate:
+$$
+\text{Clock Rate}=\cancel{\text{IC}\times\text{CPI}}\times\text{Clock Cycle Time}
+$$
+For example, the Intel Core i7-3770K has a clock rate of 3.9GHz. Different architectures may require different numbers of cycles for the same instructions.
+MIPS = Millions of Instructions Per Second:
+$$
+\text{MIPS}=\cancel{IC}\times\text{CPI}\times\text{Clock Cycle Time}
+$$
+For example, the Intel Core i7-3770K can run 106924 MIPS. Different architectures has different instruction sets, so it cannot be used to directly compare program performance.
+
+\subsection{MIPS}
+\subsubsection{Von Neumann architecture}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Pictures/arch_2.png}
+\end{figure}
+\textbf{Datapath:}\\
+Instructions are data.
+Programs can manipulate other programs (e.g. compilers, debuggers, and OS).
+\\\\
+\textbf{Von Neumann bottleneck:}\\
+Data transfer takes much longer than data processing and the processor can sit idle.
+Memory hierarchy is an attempt at mitigation.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\linewidth]{Pictures/arch_3.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Control (Fetch-execute cycle):}
+\begin{itemize}
+    \item Fetch the next instruction from memory.
+    \item Increment the program counter.
+    \item Decode the instruction.
+    \item Read operands.
+    \item Execute operations.
+\end{itemize}
+The program counter is a register containing the address of the instruction being executed.
+
+\subsubsection{Hierarchy of programming languages}
+Greater abstraction allows for:
+\begin{itemize}
+    \item More concise and natural expression of the solution.
+    \item Greater machine independence.
+\end{itemize}
+But performance can still be an issue.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\linewidth]{Pictures/arch_4.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/arch_5.png}
+\end{figure}
+
+\subsubsection{Assembly}
+Also known as "symbolic machine code." Any low-level programming language with a strong correlation to machine code instructions.
+There are different variants for each architecture:
+\begin{itemize}
+    \item x86
+    \item ARM
+    \item MIPS
+    \item PowerPC
+\end{itemize}
+There is usually a one-to-one mapping from assembly to machine code instructions.
+\\\\
+\textbf{MIPS:}
+\begin{lstlisting}
+add     $t0, $t1, $t2
+mult    $t3, $t4
+\end{lstlisting}
+$\quad$\\[-1em]
+\textbf{Machine code (base 16):}
+\begin{lstlisting}
+012a4020
+016c0018
+\end{lstlisting}
+$\quad$\\[-1em]
+\textbf{Machine code (base 2):}
+\begin{lstlisting}
+00000001001010100100000000100000
+00000001011011000000000000011000
+\end{lstlisting}
+
+\subsubsection{Instruction philosophies}
+\textbf{Complex Instructio Set Computing (CISC):}
+\begin{itemize}
+    \item Larger, more complex instruction set.
+    \item Easier to program, but leads to greater hardware complexity.
+    \item Usually in older architecture, e.g. VAX, x86.
+\end{itemize}
+\textbf{Reduced Instruction Set Computing (RISC):}
+\begin{itemize}
+    \item Simple instructions, executed rapidly.
+    \item Usually in more modern architectures, e.g. ARM, MIPS.
+    \item Generally, require more instructions for a given algorithm.
+\end{itemize}
+\begin{warning}[Important]
+There are \textbf{no guardrails} in assembly! it can be particularly brutal...
+\end{warning}
+
+\subsubsection{MIPS}
+MIPS stands for, Microprocessor without Interlocked Pipelined Stages.
+\begin{itemize}
+    \item It is a family of RISC architectures.
+    \item It is clean and scalable.
+    \item Used in embedded devices and gaming consoles.
+    \item It has a 32-bit and 64-bit version, but development stopped.
+\end{itemize}
+The general instruction format:
+\begin{lstlisting}
+<operation>     <result> <operand1> <operand2> ...
+\end{lstlisting}
+Here is a simple MIPS addition program:
+\begin{lstlisting}[language=Python]
+.data                       # Declare memory and constants
+    num1:   .word   12      # Store 12 at memory location "num1"
+    num2:   .word   13      # Store 13 at memory location "num2"
+    num3:   .word   0       # Store 0 at memory location "num3"
+.text                       # Code section
+.globl main                 # Declare the label "main" as global
+
+# Program that loads words from memory and stores words to memory
+
+main:                       # Label "main" (starting point)
+    lw      $t1, num1       # Load the value of num1 (12) in $t1
+    lw      $t2, num2       # Load the value of num2 (13) in $t2
+    add     $t3, $t1, $t2   # $t3 = $t1(12) + $t2(13) = 25
+    sw      $t3, num3       # Store the value in $t3 (25) in num3
+
+exit:                       # Label "exit"
+    li      $v0, 10         # Load service 10 (terminate program)
+    syscall                 # Perform system call with service 10.
+\end{lstlisting}
+
+\subsubsection{Assembler directives}
+\textbf{Top-level directives: Used to manage code structure}\\
+% \begin{table}[H]
+%     \centering
+%     \begin{tabular}{| l | l |}
+%         \toprule
+%         \textbf{Directive} & \textbf{Description} \\
+%         \midrule
+%         .text & Indicates that the following items are stored in the user text segemtn, typically instructions. \\
+%         \midrule
+%         .data & Indictaes that the following data items are stored in the data segment. \\
+%         \midrule
+%         .globl sym & Declare the symbol "sym" is global and can be referenced from other files. \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+\begin{tblr}{width=\textwidth, colspec={l X[l] r}, row{1}={font=\bfseries}}
+\toprule
+Directive & Description \\
+\midrule
+.text & Indicates that the following items are stored in the user text segemtn, typically instructions. \\
+.data & Indicates that the following data items are stored in the data segment. \\
+.globl sym & Declare the symbol "sym" is global and can be referenced from other files. \\
+\bottomrule
+\end{tblr}
+\\\\\\
+\textbf{Data directives:}\\
+On 32-bit architecture:
+\begin{itemize}
+    \item byte = 8 bits
+    \item halfword = 2 bytes
+    \item word = 4 bytes 
+\end{itemize}
+\begin{tblr}{width=\textwidth, colspec={l X[l] r}, row{1}={font=\bfseries}}
+\toprule
+Directive & Description \\
+\midrule
+.word w1,...,wn & Store $n$ 4-byte quantities in successive memory locations. \\
+.half h1,...,hn & Store $n$ 2-byte quantities in successive memory locations. \\
+.byte b1,...,bn & Store $n$ 1-byte quantities in successive memory locations. \\
+.ascii str & Store a \textbf{non}-null-terminated string in memory. \\
+.asciiz str & Store a null-terminated string in memory. \\
+.float f1,...,fn & Store $n$ floating point single precision numbers in successive memory locations. \\
+.double d1,...,dn & Store $n$ floating point double precision numbers in successive memory locations. \\
+.space n & Reserve $n$ successive bytes of memory. \\
+\bottomrule
+\end{tblr}
+
+\subsubsection{Labels}
+The notation of variables is a high-level programming concept not available in MIPS assembly. Instead, labels are used to identify addresses in data and code, e.g. "main" in code and "num1" in data.
+Importantly, RISC arithmetic and logic instructions do not operate on data memory directly but on registers instead. So, transfer from data memory to registers is a must!
+
+\subsubsection{Registers}
+Processors contain a limited number of high-speed memory chips, called registers. MIPS32 has 32 general purpose and 32 floating point registers, each 32 bits wide.
+It is capable of addressing $2^{32}=4,294,967,296=4\text{GB}$ of RAM. Unlike 64-bit which can address $\sim$18.1EB (exabytes).
+\begin{tblr}{width=\textwidth, colspec={l X[l] l}, row{1}={font=\bfseries}}
+\toprule
+Number & Name & Comments \\
+\midrule
+\$0 & \$zero, \$r0 & Built into hardware to ALWAYS be zero. \\
+\$1 & \$at & Reserved for assembler. \\
+\$2, \$3 & \$v0, \$v1 & First and second return values, respectively. Used for syscalls. \\
+\$4, ..., \$7 & \$a0, ..., \$a3 & First four arguments to functions. Often used with syscalls. \\
+\$8, ..., \$15 & \$t0, ..., \$t7 & Temporary registers. \\
+\$16, ..., \$23 & \$s0, ..., \$s7 & Saved registers (must be restored after function calls). \\
+\$24, \$25 & \$t8, \$t9 & More temporary registers. \\
+\$26, \$27 & \$k0, \$k1 & Reserved for kernel (operating system). \\
+\$28 & \$gp & Global pointer. \\
+\$29 & \$sp & Stack pointer. \\
+\$30 & \$fp & Frame pointer. \\
+\$31 & \$ra & Return address. \\
+& \$f0, ..., \$f32 & Single precision floating point registers. \\
+\bottomrule
+\end{tblr}
+
+\subsubsection{Memory}
+Operations can only be performed on register, thus we need to move values from memory to registers before use.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/arch_6.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Memory structure:}\\
+Logically, a 1D array of bytes. Labels map to addresses in memory. Less significant bits placed at lower addresses (little endian).
+\\\\
+For example, \$t0 holds number 0x\textcolor{red}{65}\textcolor{ForestGreen}{67}\textcolor{blue}{63}\textcolor{Fuchsia}{61}. \$s0 holds address 12. Then,
+\begin{lstlisting}
+sw      $t0, $s0
+\end{lstlisting}
+result in the following:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.15\linewidth]{Pictures/arch_7.png}
+\end{figure}
+$\quad$\\[-1em]
+Each new label in \textit{.data} is aligned on type-specific boundary. For example, word addresses are multiples of 4. But, comma separated values are packed as tightly as possible.
+\\\\
+\textbf{Memory access with offsets:}\\
+We need offset instructions to address elements in a sequence of numbers. For example:
+\begin{lstlisting}
+arr:    .word 11, 12, 13
+\end{lstlisting}
+Here \textit{arr} is the address of the first element. Much like indexing an array.
+We can use byte offsets to address elements. 
+\\\\
+Immediate form:
+\begin{lstlisting}[language=Python]
+lw      $s0, 4($t0) # $t0 holds address of arr
+\end{lstlisting}
+Label and offset form:
+\begin{lstlisting}[language=Python]
+lw      $s0, arr($t1) # if $t1 holds 4
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/arch_8.png}
+\end{figure}
+
+\subsubsection{Stack}
+We often need to free up registers but retain their values. We can use stack memory:
+\begin{itemize}
+    \item Push registers onto the stack.
+    \item Pop values from the stack back into registers.
+    \item Needs to be managed by hand using the register \textit{\$sp} pointing to the end of the stack.
+    \item Stack grows from top downward. 
+\end{itemize}
+\textbf{Stack Push:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pictures/arch_9.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Stack Pop:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pictures/arch_10.png}
+\end{figure}
+
+\subsubsection{Data transfer instructions}
+\begin{tblr}{width=\textwidth, colspec={l X[l] l}, row{1}={font=\bfseries}}
+    \toprule
+    Instruction & Example & Comments \\
+    \midrule 
+\end{tblr}
+
+% -------------------------------------
+% THEORY OF COMPUTATION
+% -------------------------------------
 \section{Theory of Computation}
 \subsection{Regular Languages}
 \subsubsection{Finite automata}
