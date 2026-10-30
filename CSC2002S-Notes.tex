@@ -903,7 +903,7 @@ Parallelization overhead is the time required to coordinate parallel tasks, as o
     \item task creation
     \item task scheduling/allocation
     \item fork/join operations
-    \item syncronization
+    \item synchronization
     \item load imbalance
 \end{itemize}
 Hadware effects:
@@ -1018,7 +1018,402 @@ $$
     \includegraphics[width=0.6\linewidth]{Pictures/pcp_46.png}
 \end{figure}
 
+\subsection{Concurrency and mutual exclusion}
+\subsubsection{Parallel vs. concurrent programming}
+So far, we've focused on parallel algorithms which used Fork/Join only.
+This lowered the span by running the same task on different data, avoiding data races via read-only shared inputs or private array sub-ranges synchronized only at \textbf{join()}.
+This is often called "data decomposition."
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_47.png}
+\end{figure}
+$\quad$\\[-1em]
+Now, we're shifting focus to concurrent programming. Threads are assigned independent tasks and share resources simultaneously to prevent race conditions.
+This is often called "task decomposition."
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/pcp_48.png}
+\end{figure}
+$\quad$\\[-1em]
+Unlike with parallelism, it's not all about implementing algorithms faster:
+\begin{itemize}
+    \item \textbf{Different tasks} may \textbf{need to happen at once} for program to work. For example, animation in a game.
+    \item Simultaneous tasks may be necessary for \textbf{responsiveness}. For example, a web server or a GUI.
+    \item Simultaneous tasks may be necessary for \textbf{efficient processor utilization}. For example, if 1 thread "goes to disk", have something else to do (often called "latency hiding").
+    \item Simultaneous taks may be necessary for \textbf{failure isolation}. Convenient structure is you want to interleave multiple tasks and don't want an exception in one to stop the other.
+\end{itemize}
+\subsubsection{Synchronization and mutual exclusion}
+Programmers must use language primitives to enforce event ordering because compilers ignore interleavings.
+In real life, we typically use a clock to coordinate events. However, synchronization is not timing.
+There is no guarantee that \textbf{Thread.sleep(100)} ensures correctness of the algorithm. 
+synchronization establishes relationships between events rather than relying on how long we expect them to take.
+\textbf{join()} enforces signaling (event A before event B) by waiting for thread termination, whereas mutual exclusion only blocks until a shared resource is free.
+Competing threads cannot overlap in a critical section (access to shared resources). One thread has access while the others wait until it finishes.
+Here are some examples of where mutual exlusion is necessary:
+\begin{itemize}
+    \item Processing different bank-account operations. What if two threads change the same acount at the same time?
+    \item Using a shared cache (e.g. hash table) of recent files. What if two threads insert the same file at the same time?
+    \item Creating a pipeline with a queue for handing work to next thread in sequence. What if enqueuer and dequeuer adjust a circular array queue at the same time? 
+\end{itemize}
+\subsubsection{Race conditions and atomic classes}
+Let's look at a simple example of a counter shared between threads.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_49.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_50.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_51.png}
+\end{figure}
+$\quad$\\[-1em]
+This leads to a race condition. When 100 CounterUpdateThread instances each run \textbf{value++} 100 times in TestCounterSafety, the three steps
+\begin{lstlisting}
+temp = value;
+temp = temp + 1;
+value = temp; 
+\end{lstlisting}
+interleave. If two threads read 1, and the first writes 2 then increments to 3, the second thread's delayed write of 2 overwrites 3.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_52.png}
+\end{figure}
+$\quad$\\[-1em]
+One way we can fix this is with a thread-safe \textbf{atomic variable class: java.util.concurrent.atomic}, which contains atomic variable classes for atomic actions on number and objects.
+\begin{itemize}
+    \item \textbf{AtomicInteger},
+    \item \textbf{AtomicLong},
+    \item \textbf{AtomicBoolean},
+    \item \textbf{AtomicReference}
+\end{itemize}
+All of these classes offer: \textbf{getAndSet()} and \textbf{getAndIncrement()}. Thus, the correct procedure for a thread is:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_53.png}
+\end{figure}
+$\quad$\\[-1em]
+There are limitations to atomic variables. Atomic variables work when the shared state can be represented by a single atomic variable and each required update can be expressed as one atomic operation.
+Making individual reads and writes atomic does not automatically make a multi-step operation atomic.
+\subsubsection{Compound actions and bad interleavings}
+Take the example of a bank account:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_54.png}
+\end{figure}
+$\quad$\\[-1em]
+This can lead to bad interleavings. Suppose we have two threads:
+\begin{itemize}
+    \item Thread T1 calls \textbf{x.withdraw(100)}.
+    \item Thread T2 calls \textbf{y.withdraw(100)}.
+\end{itemize}
+If \textbf{x} and \textbf{y} refer to different account, then there is no data race.
+However, if \textbf{x} and \textbf{y} refer to the same account, then there is a bad interleaving.
+Assume the account had an initial balance of R150.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_55.png}
+\end{figure}
+$\quad$\\[-1em]
+It is tempting and almost always wrong to fix a bad interleaving by rearranging or repeating operations, such as:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_56.png}
+\end{figure}
+$\quad$\\[-1em]
+Unfortunately, this fixes nothing. It only narrows the problem by one statement. Assume again that we have an initial balance of R150.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_57.png}
+\end{figure}
+$\quad$\\[-1em]
+We have to make use of a built-in locking mechanism in Java for providing mutual exclusion. It is used by prefixing the method with the keywork \textbf{synchronized}.
+The correct implementation then becomes:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_58.png}
+\end{figure}
+\subsubsection{Locks, monitors, and reentrancy}
+Every Java object can act as an intrinsic lock (monitor), whereas primitives cannot.
+A lock is an abstract data type with operations:
+\begin{itemize}
+    \item \textbf{new:} make a new lock, initially "not held."
+    \item \textbf{acquire:} blocks if this lock is already currently "held." Once "not held," makes lock "held."
+    \item \textbf{release:} makes this lock "not held." If one or more thread are blocked on it, exactly one will acquire it.
+\end{itemize}
+The lock implementation ensures that upon simultaneous acquires, a correct thing will happen. 
+Explicit \textbf{ReentrantLock}'s use \textbf{lock()} before a try block and \textbf{unlock()} in a finally block so locks are never held forever if an exception is thrown.
+It tracks the owning thread and hold count (incrementing on re-entry, freeing at 0), preventing deadlock.
+Here is an example of locks in Java:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/pcp_59.png}
+\end{figure}
+$\quad$\\[-1em]
+There are, however, issues with locks. A lock is a very primitive mechanism. It is still up to you to use it correctly when implementing critical sections.
+It is also easy to forget to release a lock. An easy fix is to use \textbf{synchronized (obj)}. While \textbf{synchronized} methods lock the object, \textbf{synchronized (obj)} blocks lock only the critical section to reduce contention overhead.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_60.png}
+\end{figure}
+$\quad$\\[-1em]
+Threads can run \textbf{synchronized} methods concurrently on different bank accounts, but all methods on the same account (\textbf{getBalance()}, \textbf{withdraw()}, etc.) must share one lock.
+In short, locks guarantee mutual exclusion and memory visibility of prior writes to subsequent acquires. Intrinsic locks lack fairness, while \textbf{ReentrantLock}'s optionally supports fairness.
+\subsubsection{Spin-waiting}
+Writing your own correct mutual-exclusion protocol is much harder than it looks.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_61.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_62.png}
+\end{figure}
+$\quad$\\[-1em]
+For sake of brevity, the bulk of the code for the SharedOven code is omitted. Below are four different attempts at spin-waits.
+\begin{lstlisting}[language=Java]
+// THIS IS THE CORRECT APPROACH!
+public void waitTillFree(String food, int ID) {
+    while (busy.getAndSet(true)); // spin
+    this.foodItem = food;
+    this.chefID = ID;
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+// INCORRECT
+public void waitTillFree(String food, int ID) {
+    while (busy.get()); // spin
+    busy.set(true);
+    this.foodItem = food;
+    this.chefID = ID;
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+// INCORRECT
+public void waitTillFree(String food, int ID) {
+    if (!busy.get()) {
+        this.foodItem = food;
+        this.chefID = ID;
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+// INCORRECT
+public void waitTillFree(String food, int ID) {
+    while (busy.getAndSet(false)); // spin
+    busy.set(true);
+    this.foodItem = food;
+    this.chefID = ID;
+}
+\end{lstlisting}
+
+\subsection{Concurrency and thread safety}
+\subsubsection{Thread safety fundamentals}
+A class can be considered to be thread-safe if it behaves correctly under any runtime thread scheduling or interleaving without requiring external synchronization from calling code, never entering an invalid state.
+Writing thread-safe code is about managing an object's state. We need to protect data from concurrent access.
+Race conditions arise when multiple threads access a shared, mutable state and at least one modifies it. All accesses must be coordinated via the \textbf{synchronized} keyword, using atomic variables, or locks.
+There are two kinds of race conditions:
+\begin{enumerate}
+    \item \textbf{Data races:} simultaneous read/write or write/write of the same memory location.
+    \item \textbf{Bad interleavings:} despite lack of data races, exposing bad intermediate state.
+\end{enumerate}
+Take the example of the bank account again.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_63.png}
+\end{figure}
+$\quad$\\[-1em]
+If you remove the \textbf{synchronized} on withdraw, you have a race condition (possible bad interleaving) but not a data race.
+\subsubsection{Monitors and compound actions}
+The Java monitor pattern guards all mutable states with one lock, trading concurrency for simplicity by serializing access.
+\begin{note}[Note on locks]
+Acquiring the lock associated with an object does not prevent other classes from asseccing the object. It only prevents them from acquiring the same lock.
+\end{note}
+Compound actions are multi-step operations like \textit{read-modify-write} and \textit{check-then-act} must execute atomically to remain thread-safe.
+Take the following example of a stack:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_64.png}
+\end{figure}
+$\quad$\\[-1em]
+Implementing an unsynchronized \textbf{peek()} method via a \textbf{synchronized pop()} and \textbf{synchronized push()} looks like a reader with no net effect. It exposes an inconsistent intermediate state.
+There are many bad interleaving with the \textbf{peek()} method, for example: we want the values returned from \textbf{pop()} in LIFO order.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_65.png}
+\end{figure}
+$\quad$\\[-1em]
+There are two fixes for this.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_66.png}
+\end{figure}
+\subsubsection{Visibility and volatile variables}
+Without synchronization on reads and writes, CPU caches, registers, and compiler optimizations can cause threads to see partial or permanently stale values (e.g. linked-list references).
+Synchronizing all getters and setters on the same lock triggers memory barriers on lock release so any thread subsequently acquiring that lock sees all prior writes.
+The \textbf{volatile} keyword guarantees visibility and ordering (a write happens before subsequent reads), but does not provide mutual exclusion or make the variable atomic.
+Volatile variables are useful for a simple visibility-based state such as flags, but is not a replacement for locking when compound state changes must be atomic.
+For example:
+\begin{lstlisting}[language=Java]
+volatile boolean asleep;
+while (!asleep) {
+    countSomeSheep();
+}
+\end{lstlisting}
+\subsubsection{Java synchronizers}
+A synchronizer is any object that coordinates the control flow of threads based on its state, which includes, \textbf{join()}, latches, barriers, and blocking queues.
+Latches act as a gate. No thread can pass until the gate opens, then all can pass. The key difference is that it stays open forever.
+The \textbf{java.util.concurrent.CountDownLatch} allows one or more thread to wait until a set of operations being performed in other threads complete.
+\begin{lstlisting}[language=Java]
+CountDownLatch latch = new CountDownLatch(3); // countdown from 3
+\end{lstlisting}
+\begin{itemize}
+    \item \begin{lstlisting}[language=Java]
+void await()        
+\end{lstlisting}
+The calling thread waits until the latch has counted down to zero, unless the thread is interrupted.
+    \item \begin{lstlisting}[language=Java]
+void countDown()        
+\end{lstlisting}
+Decrements the count of the latch, releasing all waiting threads if the count reaches zero.
+\end{itemize}
+The \textbf{java.util.concurrent.CyclicBarrier} allows a fixed number of parties to rendezvous repeatedly at a barrier point.
+Threads call \textbf{await()} when they reach the barrier point and \textbf{await()} blocks until all threads have reached the barrier point.
+Once all threads are there, the barrier is passed, all threads are released and the barrier is reset. 
+CyclicBarriers are useful in programs involving a fixed sized group of threads that must occasionally all wait for each other.
+\subsubsection{Reordering and memory model}
+Take the following tricky and surprisingly wrong unsynchronized concurrent code:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\linewidth]{Pictures/pcp_67.png}
+\end{figure}
+$\quad$\\[-1em]
+There is no interleaving of \textbf{f()} and \textbf{g()} where the assertion fails.
+\\\\
+\textbf{Proof 1:}\\
+Exhaustively consider all possible orderings of access to shared memory (there are 6).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Pictures/pcp_68.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Proof 2:}\\
+If \textbf{!(b $\geq$ a)}, then \textbf{a==1} and \textbf{b==0}. But if \textbf{a==1}, then \textbf{a=y} happened after \textbf{y=1}.
+And since programs execute in order, \textbf{b=x} happened after \textbf{a=y} and \textbf{x=1} happened before \textbf{y=1}. So by transitivity, \textbf{b==1}. Contradiction.
+\\\\
+However, since both \textbf{x} and \textbf{y} have data races, the compiler/hardware can reorder independent statements. Thus, the assertion can fail.
+\subsubsection{The grand compromise}
+The compiler/hardware will never perform a memory reordering that affects the result of a single-threaded program.
+It also won't perform a memory reordering that affect the result of a data-race-free multi-threaded program.
+Correctly synchronized Java programs that are data-race-free behave as though their actions occured in some sequentially consisten interleaving.
+Fixing the example from before gives us:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Pictures/pcp_69.png}
+\end{figure}
+$\quad$\\[-1em]
+The Java memory model defines how threads interact through memory. It contains rules for which values may be seen by a read of sahred memory that is updated by multiple threads.
+As the specification is similar to the memroy models for different architectures, these semantics are known as the Java programming language memory model.
+The Java memory model requires maintenance of \textit{within thread as-if-serial semantics}. Each thread must have the same result as if executed in serial.
+The Java memory model defines a partial ordering called \textbf{happens-before} on all actions in a program. 
+It guarantees action B sees action A's results only if A \textit{happens-before} B.
+\begin{itemize}
+    \item \textbf{Monitor lock rule:} a release of a lock happens before every subsequent acquire of the same lock.
+    \item \textbf{Volatile variable rule:} a write of a volatile variable happens before every subsequent read of the same volatile variable.
+\end{itemize}
+
+\subsection{Condition variables}
+\subsubsection{Busy waiting}
+There are many synchronization problems when you need a thread to wait until it can continue. The bad approach is to spin. Spinning is when threads are checking the same thing over and over again until they can proceed. This leads to wasted CPU work.
+Rather use a latch. Condition variables are a mechanism to let threads wait (block) until another thread notifies them to "wake up" and try again to do whatever could not be done before waiting.
+\subsubsection{Java monitors, sets, thread states}
+Every Java object has one intrinsic monitor lock acquired on entering a \textbf{synchronized} method and released on exit.
+A thread that tries to acquire an unavailable lock is placed in the object's entry set.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_70.png}
+\end{figure}
+$\quad$\\[-1em]
+Every object is also a condition variable (it has a wait set). When a thread calls \textbf{wait()} while owning the object's monitor:
+\begin{itemize}
+    \item It releases the object's monitor (the lock)
+    \item The state of the thread is set to waiting
+    \item The thread is placed in the wait set for the object.
+\end{itemize}
+A thread calls \textbf{wait()} when it is waiting for a condition to become true. How does a thread get notified? When a thread calls \textbf{notify()}:
+\begin{itemize}
+    \item An arbitrary thread T is selected from the wait set.
+    \item T is moved from the wait set to the entry set.
+    \item Set the state of T from waiting to runnable.
+\end{itemize}
+T can now compete for the lock to check if the condition it was waiting for is now true. Once started, an alive thread has a number of substates:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pictures/pcp_71.png}
+\end{figure}
+\subsubsection{Condition variable methods and pattern implementations}
+Java condition variables have three methods that must be called while holding that object's monitor:
+\begin{itemize}
+    \item \textbf{wait()}
+    \begin{itemize}
+        \item Calls to wait should always be inside while-loops that re-check the condition.
+        \item The call will atomically block the thread, release the lock, and put the thread in the wait set.
+        \item When the thread is later woken up, it will re-acquire the same lock before wait returns. If other thread also seek the lock, then this may lead to more blocking. There is no guarantee that a notified thread gets the lock next.
+    \end{itemize}
+    \item \textbf{notify()}
+    \begin{itemize}
+        \item wakes up one thread waiting in the object's wait set.
+        \item If there is no such thread, then notify has no effect, but this is fine.
+        \item If there are multiple threads blocked, there is no guarantee which one is notified.
+    \end{itemize}
+    \item \textbf{notifyAll()}
+    \begin{itemize}
+        \item wakes up all the threads waiting in the object's wait set.
+    \end{itemize}
+\end{itemize}
+Otherwise, Java throws \textbf{IllegalMonitorStateException}.
+\subsubsection{Correctness rules and liveness hazards}
+\textbf{Problem 1: why while and not if?}
+\begin{lstlisting}[language=Java]
+synchronized (lock) {
+    while (!condition) {
+        lock.wait();
+    }
+}
+\end{lstlisting}
+After \textbf{wait()} returns:
+\begin{itemize}
+    \item the wakeup may be spurious (false wakeup is permitted in Java);
+    \item another thread may have changed the state before this thread reacquired the lock;
+    \item a notification merely means "something may have changed," not "your condition is definitely true."
+\end{itemize}
+$\quad$\\[-1em]
+\textbf{Problem 2: why must condition-check + wait use the same lock?} \\
+Notifications are not queued in Java. If a thread isn't already waiting when \textbf{notify()} happens, that signal is lost.
+With \textbf{wait()} and \textbf{notify()} you should always wait based on a condition (inside a loop). After changing state that may make a waiting condition true, notify the appropriate waiter(s).
+\textbf{notifyAll()} is often safer when multiple threads may be waiting for different conditions on the same monitor, because tvery waiter gets a chance to re-check its condition.
+It may wake thread unnecessarily, so \textbf{notify()} is appropriate when you know exactly one eligible waiter is sufficient.
+
+\subsection{Thread liveness}
+\subsubsection{Concurrent correctness properties}
+Safety properties must always hold true, whereas liveness properties must eventually become true so threads make progress instead of waiting indefinitely.
+Starvation is the indefinite blocking of a thread, while starvation-free guarantees every thread trying to acquire a resource (such as a lock) eventually succeeds.
+Deadlock occurs when processes wait forever for an event only a waiting process can cause. Deadlock-free means the system progresses and at least one waiter succeeds.
+\subsubsection{Deadlocks and deadly embrace}
+Locks ensure safety, but indiscriminate locking makes programs inherently vulnerable to lock-ordering deadlocks. 
+In general, deadlock forms a dependency-graph cycle where threads $T_1,T_2,\dots,T_n$ each wait for a resource held by $T_{i+1}$, and $T_n$ waits for $T_1$.
+The simplest two-thread deadlock occurs when Thread A holds lock L while trying to acquire lock M, and Thread B holds lock M while trying to acquire lock L.
+Java does not automatically recover from deadlocks. Deadlocked threads are permanently disabled, stalling applications or subsystems or degrading performance under worst-case conditions.
+\subsubsection{Deadlock prevention strategies}
+Deadlock prevention ensures dependency cycles cannot arise. Never acquiring more than one lock at a time avoids deadlock, though often impractical.
+Using a single lock across all bank accounts prevents transfer deadlocks, but sacrifices concurrent deposits and withdrawals. 
+The fix is simple. Assign each bank account a unique "account number" and locking the smaller ID first prevents cycles when obeyed program-wide via global analysis.
+Explicit locks like \textbf{ReentrantLock} (unlike \textbf{synchronized}) offer \textbf{tryLock(timeout, unit)} timeouts, increasing parallelism at the cost of handling alternative paths when acquisition fails.
+
 % COMPUTER ARCHITECTURE
+\newpage
 \section{Computer Architecture}
 \subsection{Introduction}
 \subsubsection{What is architecture?}
@@ -1328,10 +1723,19 @@ $\quad$\\[-1em]
 \end{figure}
 
 \subsubsection{Data transfer instructions}
-\begin{tblr}{width=\textwidth, colspec={l X[l] l}, row{1}={font=\bfseries}}
+\begin{tblr}{width=\textwidth, colspec={l X[l] X[l]}, row{1}={font=\bfseries}}
     \toprule
-    Instruction & Example & Comments \\
+    Instruction & Example \\
     \midrule 
+    Load word & lw \$1, 100(\$2) \\
+    Store word & sw \$1, 100(\$2) \\
+    Load upper immediate & lui \$1, 100 \\
+    Load address & la \$1, label \\
+    Load immediate & li \$1, 100 \\
+    Move from hi & mfhi \$2 \\
+    Move from lo & mflo \$2 \\
+    Move & move \$1, \$2 \\
+    \bottomrule
 \end{tblr}
 
 % -------------------------------------
