@@ -79,7 +79,8 @@
 \begin{titlepage}
     \centering
     
-    \includegraphics[width=0.4\textwidth]{UCT-logo.png}\\[2cm] 
+    % \includegraphics[width=0.4\textwidth]{UCT-logo.png}\\[2cm] 
+    $\quad$\\[6cm]
     
     \textsc{\LARGE University of Cape Town}\\[1.5cm]
     
@@ -100,9 +101,923 @@
 
 % PARALLEL AND CONCURRENT PROGRAMMING
 \section{Parallel and Concurrent Programming}
-me: where is the section, yo?\\
-yo: gurt\\
-gurt: idk
+\subsection{What is parallel computing?}
+\subsubsection{Changing a core assumption}
+So far, all algorithms have assumed that one thing happens at a time. This is traditional sequential programming.
+We have to change the core assumption. Multiple activities may be in process concurrently, and some may execute simultaneously in parallel.
+Parallel and concurrent programming remove the requirement that all computational steps belong to one global serial order.
+\begin{definition}[Commonly used terms]
+In most conventional usage,
+\begin{itemize}
+    \item \textbf{Parallel} programming focuses on arranging that multiple activities co-occur.
+    \item \textbf{Distributed} programming focuses on arranging thta activities occur in different places.
+    \item \textbf{Concurrent} programming focuses on interactions of ongoing activities with each other.
+\end{itemize}
+However, all three terms may apply in most contexts.
+\end{definition}
+\subsubsection{Parallelism versus concurrency}
+\textbf{Parallel program:}\\
+Use extra computational resources to solve a problem faster by performing multiple computations simultaneously.
+\\\\
+\textbf{Concurrent program:}\\
+Allow multiple activities to be in process during the same period of time.
+\subsubsection{Parallel algorithm example}
+Here is the pseudo-code for an array sum algorithm:
+\begin{lstlisting}[language=Java]
+public int parallelSum(array, workers):
+    partial = new array[workers];
+
+    PARALLEL FOR worker = 0 to workers - 1 {
+        lo = worker * array.length / workers;
+        hi = (worker + 1) * array.length / workers;
+        partial[worker] = sequentialSum(array, lo, hi);
+    }
+
+    return sequentialSum(partial, 0, workers);
+\end{lstlisting}
+\begin{warning}[Parallel workers]
+With $p$ workers, the theoretical upper bound for the parallel summation phase is approximately $p$, but the actual speedup will usually be slower because of:
+\begin{enumerate}
+    \item thread-management overhead,
+    \item memory bandwidth,
+    \item load imbalance, and
+    \item the final sequential combination.
+\end{enumerate}
+\end{warning}
+\subsubsection{Concurrency example}
+For example, multiple operations on a hash table.
+What could go wrong if two threads update the same bucket at the same time?
+\begin{enumerate}
+    \item Lost updates;
+    \item Corruption of a bucket chain or tree;
+    \item Duplicate entries despite a uniqueness invariant;
+    \item A lookup observing a partially constructed state;
+    \item Resizing while another operation uses the old table;
+    \item etc.
+\end{enumerate}
+Here is the pseudo-code for a shared hash table:
+\begin{lstlisting}[language=Java]
+public void insert(key, value):
+    bucket = findBucket(key)
+
+    /* Acquire protection for bucket */
+    /* Perform insertion */
+    /* Release protection for bucket */
+\end{lstlisting}
+\begin{note}[Shared hash table]
+\begin{itemize}
+    \item Prevent bad interleaving (correctness)
+    \item But allow some concurrent access (performance)
+\end{itemize}
+\end{note}
+\subsubsection{Restaurant analogy}
+A serial program is a recipe for one cook. The cook does one thing at a time (sequential), maybe switching between tasks (time-slicing).
+Options for lots of cooks:
+\begin{itemize}
+    \item use helpers to assist with a big task, like slicing lots of potatoes for hot chips \textbf{(data parallelism)}.
+    \item dedicate helpers to different taks, such as beating eggs, slicing onions, washing up \textbf{(concurrency)}.
+    \item have a list of taks and assign them to workers as they are free \textbf{(worker pool)}.
+    \item But too many chefs mean too much time coordination which leads to them bumping into each other etc.
+\end{itemize}
+Often there are multiple steps that can be done at the same time with access to more cooks. More cooks require extra coordination.
+A cook may have to wait for another cook to finish something. There are limited resources.
+\begin{itemize}
+    \item If you only have one oven, two cooks won't be able to bake cakes at different temperatures at the same time.
+    \item Some recipes will require exclusive use of the oven.
+\end{itemize}
+One approach is to allow access to the oven, but only one at a time (cakes can flop). Cooks must wait until the oven is free.
+\begin{lstlisting}[language=Java]
+if (!ovenBusy) {
+    ovenBusy = true;
+    bakeCake();
+    ovenBusy = false;
+}
+\end{lstlisting}
+\begin{warning}[Pseudo-code issue]
+This specific pseudo-code is fine for a single-threaded program, but will it work for a multi-threaded program?
+\end{warning}
+\subsubsection{Race conditions}
+\begin{definition}[Race condition]
+A \textbf{race condition} is an error where the correctness of a program depends on the relative timing or interleaving of concurrent operations.
+\end{definition}
+$\quad$\\[-1em]
+The idea is that the events race each other. A particular execution may appear correct even though the race condition is present.
+Uninteded race conditions are incredibly common in concurrent programs.
+\subsubsection{Non-determinism}
+\textbf{Deterministic:}\\
+In a simple sequential program, instructions are executed in a fixed order determined by the program and its input. 
+The execution of one procedure does not overlap in time with another.
+\\\\
+\textbf{Non-deterministic:}\\
+In concurrent programs, there are many possible interleavings. The exact interleaving is generally not predictable. 
+Non-deterministic scheduling does not imply an incorrect or unpredictable final result, but a correct concurrent program should satisfy its specification under every permitted interleaving.
+\subsubsection{When is concurrent programming necessary?}
+Complex systems like:
+\begin{itemize}
+    \item \textbf{operating systems},
+    \item \textbf{web browsers},
+    \item \textbf{real-time} systems,
+    \item \textbf{event-based} implementations of graphical user interfaces,
+    \item multiuser \textbf{games}, \textbf{chat} and \textbf{e-commerce}
+\end{itemize}
+handle mutiple things happening at once and are therefore multi-threaded. These systems must respond to multiple ongoing activities.
+Their tasks may be interleaved on one core or executed in parallel on several cores.
+\subsubsection{Moore's law}
+Between 1980-2005, Moore's law held:
+\begin{itemize}
+    \item clock speeds of desktop computers doubled every 18-24 months
+    \item exponentially faster at running sequential programs
+\end{itemize}
+But, it eventually reached
+\begin{itemize}
+    \item \textbf{Power wall:} increasing frequency and transistor activity produce excessive power use and heat.
+    \item \textbf{Memory wall:} processor performance improved faster than memroy-access latency and bandwidth.
+\end{itemize}
+\subsubsection{Concurrency does not require multiple cores}
+On one logical processor, runnable threads take turns through scheduling and pre-emption. Their executions are interleaved.
+On multiple logical processors, several threads may execute simultaneously. The operating system and runtime control processor scheduling.
+\subsubsection{High performance computing (HPC)}
+HPC uses cutting-edge parallel computers to solve "grand-challenge" (computational) problems.
+Programmers write programs to solve such computationally large problems that it would take years, or centuries, for one computer to finish it.
+\\\\
+\textbf{Deep learning:}\\
+The modern growth of deep learning was enabled by:
+\begin{itemize}
+    \item large training datasets;
+    \item algorithmic advances;
+    \item GPUs and specialized accelerators;
+    \item efficient parallel software frameworks;
+    \item large-scale distributed computing.
+\end{itemize}
+\textbf{Weather forecasting and climate modelling:}\\
+Weather models divide the atmosphere and oceans into a three-dimensional grid. Each grid cell requires repeated calculations of temperature, pressure, moisture, wind, radiation, and fluid movement.
+Cells interact with neighboring cells, so the calculations is both highly parallel and communication-intensive.
+\\\\
+\textbf{Molecular modelling:}\\
+Molecular modelling simulates the behavior and interactions of molecules to try to understand their properties.
+It is widely used in drug development.
+\\\\
+\textbf{Animations and visual effects:}\\
+Typically, animation studios need HPC systems. Computer graphics must be rendered into high-resolution images.
+Rendering turns a virtual 3D scene into a 2D image, and requires a lot of computational power.
+\begin{note}[Note]
+While HPC as a concept should be known, the "in-between" bits for deep learning, forecasting, molecular modelling, etc. are not necessarily examinable.
+\end{note}
+
+\subsection{The shared memory programming model}
+\subsubsection{The shared memory model}
+All memory is placed into a single (physical) address space. Processors are connected by some form of interconnection network.
+There is a single virtual address space across all of memory. Each processor can access all locations in memory.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_1.png}
+\end{figure}
+The ideal picture of shared memory:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_2.png}
+\end{figure}
+versus, the actual architecture of shared memory systems:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_3.png}
+\end{figure}
+\subsubsection{Cache}
+A memory cache, also called a "CPU cache," is a memory bank that stores recently used instructions and data close to the processor.
+\begin{itemize}
+    \item Is had faster static RAM (SRAM) chips than the dynamic RAM (DRAM) used for main memory.
+    \item The cache allows instructions to be executed and data to be read and written at higher speed.
+\end{itemize}
+Modern chips can have multiple caches (L1, L2, L3):
+\begin{itemize}
+    \item The L1 cache is the fastest.
+    \item Each subsequent cache is slower but larger than L1.
+    \item Instructions and data are staged from main memory to L3 to L2 to L1 to the processor.
+    \item One multicore chips, the L3 cache is generally shared among all the processing chips.
+\end{itemize}
+Why do caches matter for PCP? If two cores repeatedly modify the same variable, their caches continually invalidate one another.
+\subsubsection{Processes}
+\begin{definition}[Process]
+A \textbf{process} is an operating system unit of resource allocation both for CPU time and for memory.
+\end{definition}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_4.png}
+\end{figure}
+$\quad$\\[-1em]
+A process is represented by its code, data, and the state of the machine registers. The data/memory typically contains:
+\begin{itemize}
+    \item code
+    \item global/static data
+    \item heap
+    \item stack
+\end{itemize}
+Generally, each process in an operating system has its own address space.
+\subsubsection{Threads}
+Process given internal concurrency with multiple (lightweight) threads. This has multiple threads of control.
+A process with multiple (lightweight) threads of control has multiple stacks, one for each thread, but access to shared memory too.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_5.png}
+\end{figure}
+\subsubsection{Parallel program}
+The shared memory model has multiple explicit threads running concurrently. Threads can:
+\begin{itemize}
+    \item perform multiple computations in parallel;
+    \item perform separate simultaneous activities;
+    \item communicate implicitly by reading and writing shared memory.
+\end{itemize}
+\begin{warning}[Warning]
+Can be dangerous if you don't protect your variables correctly!
+\end{warning}
+\subsubsection{Sequential program state}
+A running serial program has:
+\begin{itemize}
+    \item \textbf{One program counter}
+    \item \textbf{One call stack}
+    \begin{itemize}
+        \item Each stack frame holds the local variables for a method call that has started but not yet finished.
+        \item Calling a method pushes a new frame and returning from a method pops a frame.
+        \item Call stacks are why recusion is not "magic."
+    \end{itemize}
+    \item \textbf{Objects}
+    \begin{itemize}
+        \item Objects are created by calling \textbf{new}.
+        \item We call the memory that holds all the objects the heap.
+    \end{itemize}
+    \item \textbf{Static fields of classes.}
+\end{itemize}
+\subsubsection{Programming model: shared memory}
+Each thread has its own program counter, call stack, and local variables.
+All threads share one collection of objects and static fields.
+Static fields of classes are also shared by all threads.
+Threads communicate through shared objects (implicit communication). 
+Threads communicate by writing data that another thread later reads.
+\\\\
+\textbf{Sequential computation:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\linewidth]{Pictures/pcp_6.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Concurrent computation:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\linewidth]{Pictures/pcp_7.png}
+\end{figure}
+\subsubsection{How threads run}
+As the programmer, you create the threads. The operating system scheduler determines how and when those threads are run on the available processors.
+Unless you are writing the scheduler, \textbf{you do not have control over this}.
+You don't how how many processors/cores your program will use (you can guess).
+You don't how the order in which threads will execute (you can not guess).
+\begin{warning}[Super important]
+Never write code that depends on thread execution order!
+\end{warning}
+\subsubsection{Asyncrony}
+Threads are subject to sudden unpredictable delays:
+\begin{itemize}
+    \item \textbf{Cache misses} (short: nanoseconds)
+    \item \textbf{Page faults} (long: milliseconds)
+    \item \textbf{Scheduling quantum finished} (really long: milliseconds)
+    \item \textbf{Garbage collection} (really, really long: milliseconds to seconds)
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_8.png}
+\end{figure}
+\subsubsection{Other parallel programming models}
+\textbf{Message passing:}\\
+\begin{itemize}
+    \item Explicit threads/processes, each with their own objects/data.
+    \item Communication is via explicitly sending/receiving messages, containing copies of the data (each process has its own memory).
+    \item Most common model on HPC systems.
+\end{itemize}
+\textbf{MapReduce:}\\
+\begin{itemize}
+    \item Data parallelism concept from functional programming languages like LISP.
+    \item Have primitives for things like "apply function to every element of an array in parallel."
+    \item MapReduce was developed by Google and its programming model has since been adopted by many software frameworks, e.g. Apache's open-source Hadoop.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_9.png}
+\end{figure}
+\textbf{Golang:}\\
+Go provides lightweight threads (goroutines) and channels for communication.
+\begin{note}[Note]
+Don't worry too much about the finer details when going through this section. The most important takeaway here is that there are alternatives to the shared memory model.
+\end{note}
+
+\subsection{Multi-threading in Java}
+\subsubsection{Java is always multi-threaded}
+The Java Virtual Machine (JVM) executes as a process under the operating system.
+In Java, every program has more than one thread. It starts with one thread, called the main thread.
+The main thread can then create additional threads.
+The JVM also creates system threads to perform tasks such as:
+\begin{itemize}
+    \item garbage collection,
+    \item signal handling,
+    \item JIT compilation,
+    \item etc.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_10.png}
+\end{figure}
+\subsubsection{Basic threads in Java}
+All threads are associated with an instance of the class \textbf{java.lang.Thread}.
+There are two basic strategies for using the Thread class:
+\begin{enumerate}
+    \item create a Thread object each time the application needs to initiate an asynchronous task, or
+    \item pass the application's tasks to an executor (\textbf{java.util.concurrent}) that will launch and manage the threads.
+    This is the standard approach for parallelization. Uses a high-level API to manage a thread pool for large-scale applications that run on multi-processor and multi-core systems.
+\end{enumerate}
+There are two ways to create a basic thread in Java:
+\begin{enumerate}
+    \item Extend the Thread class (\textbf{java.lang.Thread}). Easy for simple programs.
+    \item Implement the Runnable interface in an object and pass that to a thread's constructor (\textbf{java.util.Runnable}). This is the more general and flexible approach.
+\end{enumerate}
+\subsubsection{Thread class}
+A Thread class manages a single sequential thread of control. Threads may be created and deleted dynamically.
+The Thread class executes instructions from its method \textbf{run()}.
+The actual code executed depends on the implementation provided for \textbf{run()} in a derived class.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_11.png}
+\end{figure}
+\subsubsection{Runnable interface}
+Since Java does not permit multiple inheritance, it is sometimes more convenient to implement the \textbf{run()} method in a class not derived from Thread, but from the interface Runnable.
+The Runnable interface defines a single method, \textbf{run()}, containing the code executed in the thread.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_12.png}
+\end{figure}
+\subsubsection{start() vs. run()}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_13.png}
+\end{figure}
+\begin{note}[Note]
+TL;DR Always use \textbf{start()}.
+\end{note}
+\subsubsection{Thread vs. Runnable example}
+Here is an example of a program using Thread:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_14.png}
+\end{figure}
+versus, the same program instead using Runnable:
+$\quad$\\[-1em]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_15.png}
+\end{figure}
+\subsubsection{Thread life cycle}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_16.png}
+\end{figure}
+\subsubsection{Stopping a thread}
+Most of the time, we allow threads to stop by running to completion.
+Sometimes we want to stop threads sooner, e.g. when the user cancels an operation.
+It is not very easy to get threads to stop safely, quickly, and reliably.
+\textbf{Thread.stop()} and \textbf{Thread.suspend()} are too dangerous and was deprecated.
+Instead, ask the thread to stop by using an interupt.
+\subsubsection{Java executors for parallel programming}
+Executor objects in Java distribute tasks to worker threads in a thread pool.
+Thread pools reduce thread creation overhead since allocating and deallocating many thread objects require significant memory management.
+There are three executor interfaces in Java. We primarily focus on \textbf{Fork/Join}.
+The Fork/Join executor is designed for divide-and-conquer algorithms especially thos that are recursive.
+It uses the "work-stealing" algorithm, where idle threads can steal tasks from busy threads.
+\textbf{ForkJoinPool} is the main thread pool class. There are two types of tasks sent to the pool.
+\begin{itemize}
+    \item \textbf{RecursiveAction} has no return value, and
+    \item \textbf{RecursiveTask} returns a value.
+\end{itemize}
+\subsubsection{Hello world with Fork/Join}
+Here are two versions of the same program. The first has race conditions and the second does not.
+The first version:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_17.png}
+\end{figure}
+$\quad$\\[-1em]
+versus, the second version:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_18.png}
+\end{figure}
+
+\subsection{Parallel programming in Java}
+\subsubsection{Basic parallel problem}
+Let's take the example of summing the elements of an array.
+An $O(n)$ sequential solution to this problem is trivial:
+\begin{lstlisting}[language=Java]
+public long sum(long[] arr) {
+    long ans = 0;
+    for (int i=0; i<arr.length; i++) {
+        ans += arr[i];
+    }
+    return ans;
+}
+\end{lstlisting}
+\begin{note}[Note]
+This problem is to illustrate the concept of parallelization. It's not an ideal problem to parallelize... 
+\end{note}
+Benchmarking the results with an array filled with 1's, we get:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_19.png}
+\end{figure}
+\subsubsection{Parallelism idea 1: Normal threads (naive)}
+Let's suppose 4 cores can execute work simultaneously. The idea is: have 4 threads simultaneously sum 1/4 of the array each.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_20.png}
+\end{figure}
+$\quad$\\[-1em]
+Let's implement the task each thread will execute:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_21.png}
+\end{figure}
+$\quad$\\[-1em]
+Because we must override a no-arguments/no-result \textbf{run()} method, we use fields/variables to communicate across threads.
+After implementing the main thread section correctly, it should look something like this:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_22.png}
+\end{figure}
+\subsubsection{Parallelism idea 2: Divide-and-conquer (best)}
+This problem is fairly straightforward to implment using a divide-and-conquer algorithm. 
+We use the parallelism for the recursive calls.
+The result-combining is done in parallel as well, which is mor efficient.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_23.png}
+\end{figure}
+$\quad$\\[-1em]
+Using divide-and-conquer with platform threads:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pictures/pcp_24.png}
+\end{figure}
+\subsubsection{Fork/Join framework}
+\begin{note}[Important distinction]
+A \textbf{task} describes \textbf{work}. A \textbf{worker} thread executes \textbf{work}.
+\end{note}
+\begin{note}[Note]
+\textbf{ForkJoinTasks} (either RecursiveAction or RecursiveTask) are given to a \textbf{ForkJoinPool} (a pool of threads).
+\end{note}
+$\quad$\\[-1em]
+There are two ways to creatre a ForkJoinPool. 
+\\\\
+\textbf{Option 1:}
+\begin{lstlisting}[language=Java]
+static final ForkJoinPool fjPool = new ForkJoinPool();
+\end{lstlisting}
+Here, \textbf{ForkJoinPool()} creates a pool with parallelism equal to \textbf{Runtime.availableProcessors()}, i.e. the total number of processors in your machine.
+Importantly, you can specify the parallelism with
+\begin{lstlisting}[language=Java]
+new ForkJoinPool(int p)
+\end{lstlisting}
+$\quad$\\[-1em]
+\textbf{Option 2:}
+\begin{lstlisting}
+static final ForkJoinPool fjPool = new ForkJoinPool.commonPool();
+\end{lstlisting}
+Here, \textbf{commonPool()} creates a pool with parallelism equal to \textbf{Runtime.availableProcessors()-1}, i.e. one less than the total number of processors in your machine.
+Using this, we can implement the final version of our program:
+\begin{figure}[H]
+    \centering
+    \vspace{-8px}
+    \includegraphics[width=0.42\linewidth]{Pictures/pcp_25.png}
+\end{figure}
+$\quad$\\[-1em]
+When is Fork/Join really useful?
+\begin{itemize}
+    \item When you are doing the parallel computation many times.
+    \item When threads have a lot to do.
+    \item When tasks or subproblems require different amounts of work, we may encounter load imbalance.
+    In this case, we want idle workers to steal queued tasks from busy workers.
+\end{itemize}
+
+\subsection{Parallel algorithms}
+\subsubsection{Divide-and-conquer: reductions}
+Reduction operations produce a signle answer from a collection via an associative operator, e.g. \textbf{max}, \textbf{count}, \textbf{left-most}, \textbf{sum}, etc.
+Recursive results don't have to be single numbers of strings. They can be arrays or objects with multiple fields.
+\subsubsection{Divide-and-conquer: maps}
+A map independently transforms every input element, producing one output element for each input element. There is no combining of results.
+A canonical example: vector addition
+\begin{lstlisting}[language=Java]
+public int[] vector_add(int[] arr1, int[] arr2) {
+    assert (arr1.length == arr2.length);
+    result = new int[arr1.length];
+
+    for (int i=0; i<arr1.length; i++) {
+        result[i] = arr1[i] + arr2[i];
+    }
+
+    return result;
+}
+\end{lstlisting}
+Maps with the Fork/Join framework:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.71\linewidth]{Pictures/pcp_26.png}
+\end{figure}
+\subsubsection{Parallelizing image processing algorithms}
+Low-level image processing uses the individual pixel values to modify the image in some way. Image processing operations can be divided into:
+\begin{itemize}
+    \item \textbf{point operations:} output produced based on the value of a single pixel.
+    \begin{itemize}
+        \item thresholding;
+        \item brightness adjustment;
+        \item contrast adjustment;
+        \item color inversion;
+        \item converting RGB to greyscale;
+        \item coloring pixels (Mandlebrot set)
+    \end{itemize}
+    \item \textbf{local operations:} produce output based on a group of neighboring pixels, e.g. smoothing.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \vspace{-10px}
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_27.png}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \vspace{-10px}
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_28.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{More complex image operation: median smoothing}\\
+A mean filter sets each pixel in the image to the average of the currounding pixels, whereas a median filter sets each pixel to the median of the surrounding pixels.
+A median filter is much better at perserving edges after smoothing.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Pictures/pcp_29.png}
+\end{figure}
+\subsubsection{Timestep simulations}
+Many simulations model a system that changes through a sequence of discrete timesteps:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_30.png}
+\end{figure}
+$\quad$\\[-1em]
+Stencil computations are a common way to calculate the next state in a grid-based timestep simulation.
+\begin{itemize}
+    \item Each timestep may contain a large amount of parallel work.
+    \item All calculations in timestep $t$ should use the same old state.
+    \item The next timestep cannot begin until timestep $t$ is complete.
+    \item Stop after a fixed number of timesteps or when a termination/convergence condition is reached.
+\end{itemize}
+\begin{warning}[Important]
+Do not update the current state in place if later calculations in the same timestep depend on it.
+\end{warning}
+$\quad$\\[-1em]
+Examples of timestep simulations:
+\begin{itemize}
+    \item heat diffusion;
+    \item weather simulations;
+    \item fluid flow;
+    \item molecular simulations;
+    \item astronomical simulations;
+    \item cellular automata;
+    \item wildfire spread.
+\end{itemize}
+\subsubsection{Map vs. stencil}
+\textbf{Map:}
+\begin{itemize}
+    \item Output depends on one input element.
+    \item Example: image thresholding.
+    \item No neighborhood or boundary issues.
+    \item Usually a single pass.
+    \item Directly independent.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \vspace{-20px}
+    \includegraphics[width=0.4\linewidth]{Pictures/pcp_31.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Stencil:}
+\begin{itemize}
+    \item Output depends on neighboring elements.
+    \item Example: heat diffusion.
+    \item Boundary treatment is required.
+    \item Often repeated over many timesteps.
+    \item Independent only when reading an unchanged state.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \vspace{-15px}
+    \includegraphics[width=0.4\linewidth]{Pictures/pcp_32.png}
+\end{figure}
+\subsubsection{Parallel prefix-sum}
+The parallel prefix-sum does two passes. The first pass builds a tree bottom-up: a reduction pass to compute subtree sums.
+The second pass traverses the tree top-down: a distribution pass to propogate the accumulated value from the left.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_33.png}
+\end{figure}
+$\quad$\\[-1em]
+\textbf{Algorithm: part 1}\\
+Build a binary tree where:
+\begin{itemize}
+    \item The root has sum of the range $[x,y)$.
+    \item If the range contains more than one element, i.e. $\text{hi}-\text{lo}>1$:
+    \begin{itemize}
+        \item Left child has sum of $[\text{lo},\text{mid})$.
+        \item Right child has sum of $[\text{mid},\text{hi})$.
+        \item A leaf has sum of $[i,i+1)$, i.e. \textbf{input[i]}.
+    \end{itemize}
+\end{itemize}
+\textbf{Algorithm: part 2}\\
+Pass down a value \textbf{fromLeft}:
+\begin{itemize}
+    \item Root given a \textbf{fromLeft} of 0.
+    \item Node takes its \textbf{fromLeft} value and
+    \begin{itemize}
+        \item Passes its left child the same \textbf{fromLeft}.
+        \item Passes its right child its \textbf{fromLeft} plus its left child's \textbf{sum}.
+    \end{itemize}
+    \item At the leaf for array position $i$, \textbf{output[i] = fromLeft[i] + input[i]}.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_34.png}
+\end{figure}
+\subsubsection{Pack/filter, stream compaction}
+Given an array \textbf{input}, produce an array \textbf{output} containing only elements such that $f(x)$ is true.
+For example:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_35.png}
+\end{figure}
+$\quad$\\[-1em]
+Finding the elements for \textbf{output} is easy, but getting them in the right place seems hard. 
+We can use parallel prefix-sum to help us:
+\begin{enumerate}
+    \item Parallel map to compute a bit-vector for true vectors.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Pictures/pcp_36.png}
+    \end{figure}
+    \item Parallel prefix-sum on the bit-vector.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Pictures/pcp_37.png}
+    \end{figure}
+    \item Parallel map to produce the output.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{Pictures/pcp_38.png}
+    \end{figure}
+\end{enumerate}
+Here is the pseudo-code:
+\begin{lstlisting}[language=Java]
+output = new array of size bitsum[n-1]
+for (int i=0; i<input.length; i++) {
+    if (bits[i]==1) {
+        output[bitsum[i]-1]=input[i];
+    }
+}
+\end{lstlisting}
+\subsubsection{Quicksort}
+Quicksort is very popular sequential sorting algorithm that performs well with:
+\begin{itemize}
+    \item Average time: $O(N\log N)$.
+    \item Worst-case time: $O(N^2)$
+\end{itemize}
+
+\subsection{Parallel performance}
+\subsubsection{Demonstrating parallel performance}
+To justify their existence, parallel algorithms must be both correct and efficient.
+To demonstrate correctness, you validate an algorithm against the serial version to show that it produces the same results across a range of inputs.
+To demonstrate efficiency, you benchmark an algorithm against the serial version, to show that it is faster.
+\subsubsection{Speedup}
+The speedup expected with $P$ processors is equal to the time to solve problem size $n$ with 1 thread divided by the time to solve problem size $n$ with $P$ threads.
+$$
+S_P=\frac{\text{time to solve }n\text{ with 1 thread}}{\text{time to solve }n\text{ with }P\text{ threads}}=\frac{T_1}{T_P}
+$$
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_39.png}
+\end{figure}
+\begin{warning}[Note]
+To compare parallel performance, you need to show speedup graphs and not time graphs!
+\end{warning}
+$\quad$\\[-1em]
+Perfect linear speedup is when $S_P=P$. In this case, doubling $P$ halves the running time.
+However, this is hard to achieve in practice. Most algorithms reach an optimal level of performance and then deteriorates.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_40.png}
+\end{figure}
+$\quad$\\[-1em]
+Superlinear speedup is when $S_P>P$. This is generally not possible in the simple ideal model where the same work is performed and memory effects are ignored.
+It can occasionally occur in practice due to:
+\begin{itemize}
+    \item cache effects / memory hierarchy,
+    \item different algorithmic behavior or
+    \item measurement artifacts
+\end{itemize}
+Scalability describes how well performance continues to improve as we increase the processor count and/or the problem size.
+\subsubsection{Parallel efficiency}
+Speedup tells us how much faster a program is running.
+Efficiency tells us how effectively we are using available processors, where perfect efficiency is 100\%.
+$$
+E_P=\frac{S_P}{P}=\frac{T_1}{PT_P}
+$$
+As we add processors, speedup may continue to increase, while efficiency decreases. For example,
+\begin{itemize}
+    \item Speedup of 6 on 8 cores: $E_8=75\%$.
+    \item Speedup of 6 on 32 cores: $E_{32}=18.75\%$.
+\end{itemize}
+\subsubsection{Theoretical analysis of expected speedup}
+There are two key measures of runtime:
+\begin{itemize}
+    \item Work ($T_1$): how long would it take 1 processor. The serial time e.g. for divide-and-conquer, just "sequentialize" the recursive forking.
+    \item Span ($T_\infty$): how long it would take on an ideal machine with unlimited processors. Also called the "critical path length" or "computational depth."
+\end{itemize}
+The maximum possible speedup is $T_P=\frac{T_1}{T_\infty}$, i.e. work divided by span.
+Parallel algorithms are about decreasing span without increasing work too much.
+\begin{note}[Note]
+For theoretical work/span analysis, $T_1$ is the time taken by the parallel algorithm on one processor. For experimental evaluation, speedup is measured against the best appropriate serial implementations:
+$$
+S_P=\frac{T_{\text{serial}}}{T_{\text{parallel},P}}
+$$
+Always state which baseline you use.
+\end{note}
+\subsubsection{Limits on $T_P$}
+\textbf{Work law:}
+$$
+\boxed{T_P\geq\frac{T_1}{P}}
+$$
+Each processor executes at most 1 instruction per unit time, and hence $P$ processors can execute at most $P$ instructions per unit time.
+Thus, to do all the work on $P$ processors, it must take at least $T_1/P$ time.
+\\\\
+\textbf{Span law:}
+$$
+\boxed{T_P\geq T_\infty}
+$$
+A finite number of processors cannot outperform an infinite number of processors, because the infinite processor machine could just ignore all but $P$ of its processors and mimic a $P$ processors machine exactly.
+\subsubsection{The DAG (cost graph)}
+Program execution can be seen as a DAG where nodes are the pieces of work and edges indicate either a fork or a join.
+\begin{figure}[H]
+    \centering
+    \vspace{-20px}
+    \includegraphics[width=0.25\linewidth]{Pictures/pcp_41.png}
+\end{figure}
+$\quad$\\[-1em]
+The work ($T_1$) is the total number of nodes in the DAG.
+The span ($T_\infty$) is th elongest path in the DAG.
+The set of instructions form the vertices of the DAG, and the graph edges indicate dependence between instructions.
+We say that instruction $x$ precedes an instruction $y$ if $x$ must complete before $y$ can begin.
+\subsubsection{Divide-and-conquer parallel algorithms}
+\textbf{fork} and \textbf{join} are very felxible, but divide-and-conquer maps and reductions use them in a very basic way.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_42.png}
+\end{figure}
+$\quad$\\[-1em]
+The work is $O(N)$ and the span is $O(\log N)$. Therefore, the maximum speedup is $O(N/\log N)$.
+As $N$ increasesm the available parallelism $N/\log N$ becomes very large.
+With enough processors, this algorithm therefore has substantial theoretical parallelism.
+Anything that can use results from two halves and merge them in $O(1)$ time has the same property.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Pictures/pcp_43.png}
+\end{figure}
+$\quad$\\[-1em]
+For well-structured fork/join computations, the framework has expected running time
+$$
+T_P=O(T_1/P)+O(T_\infty)
+$$
+The first term dominates for relatively small $P$, and the second for sufficiently large $P$.
+It's only an "expected" result because internally the framework uses randomness.
+\subsubsection{Why measured speedup falls below the ideal}
+Parallelization overhead is the time required to coordinate parallel tasks, as opposed to doing useful work. For example:
+\begin{itemize}
+    \item task creation
+    \item task scheduling/allocation
+    \item fork/join operations
+    \item syncronization
+    \item load imbalance
+\end{itemize}
+Hadware effects:
+\begin{itemize}
+    \item cache misses
+    \item memory bandwidth
+    \item contention
+\end{itemize}
+\subsubsection{Where does scaling stop?}
+As the number of processors $P$ increases:
+\begin{itemize}
+    \item \textbf{Initially:} useful parallel work dominates, i.e. $T_P=T_1/P$. Speedup may be close to linear.
+    \item \textbf{Then:} parallel overheads and hardware effects become significant, e.g. task scheduling, joins, load imbalance, cache misses, memory bandwidth.
+    \item \textbf{Eventually:} the serial portion / span limits further improvement. Adding processors gives smaller and smaller gains.
+    \item \textbf{Beyond this point:} extra processors may actually make the program slower.
+\end{itemize}
+\subsubsection{Amdahl's law}
+Amdahl's law is a performance model/law that demonstrates the diminishing returns of adding more processors.
+$$
+S_P=\frac{1}{(1-p)+\frac{p}{P}}
+$$
+Typically, some parts of the program parallelize well, e.g. maps/reductions over arrays. We call this the parallel fraction $p$.
+Some parts of the program are inherently sequential, e.g. reading a linked list, getting input, reading from a file, doing computations where each step needs the previous step, etc.
+We call this the serial fraction $s=1-p$.
+In terms of work and span, this means that the serial portion restricts the minimum span, thus
+$$
+T_\infty\geq (1-p)T_1
+$$
+and so, the maximum possible speedup is:
+$$
+\frac{T_1}{T_\infty}\leq\frac{1}{1-p}
+$$
+For example, ten processors with 60\% parallelizable and 40\% sequential. How close are we to a 10-fold speedup?
+$$
+S_{10}=\frac{1}{0.4+\frac{0.6}{10}}=2.17
+$$
+Now, ten processors with 99\% parallelizable and 1\% sequential. How close are we to a 10-fold speedup now?
+$$
+S_{10}=\frac{1}{0.01+\frac{0.99}{10}}=9.17
+$$
+Graphing Amdahl's law:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_44.png}
+\end{figure}
+$\quad$\\[-1em]
+This is an important graph to consider:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pictures/pcp_45.png}
+\end{figure}
+\subsubsection{Gustafson's law}
+Amdahl's law assumes that the total problem size remains fixed as processors are added.
+In practice, additional computing power is often used to solve larger problems in approximately the same elapsed time.
+The additional work is often predominantly parallel, so the serial fraction becomes less important as the problem size grows.
+\subsubsection{Scaling with problem size}
+Parallel performance depends stringly on the size of the problem.
+\begin{itemize}
+    \item A parallel program may perform poorly for small problems because:
+    \begin{itemize}
+        \item there is too little useful work to offset the parallel overhead;
+        \item task creation, scheduling and \textbf{join()} costs dominate.
+    \end{itemize}
+    \item As the problem becomes larger:
+    \begin{itemize}
+        \item there is more useful work available to divide between processors;
+        \item parallel overhead becomes a smaller fraction of the total runtime;
+        \item speedup may therefor increase with problem size.
+    \end{itemize}
+    \item But eventually:
+    \begin{itemize}
+        \item memory bandwidth, cache capacity, memory use or other hardware limitations may become important.
+    \end{itemize}
+\end{itemize}
+\subsubsection{Grid simulations}
+Increasing the grid dimensions can increase the work in more than one way.
+For a $R\times C$ simulation, the work per timestep is directly proportional to $R\cdot C$, but the total work is approximately:
+$$
+\boxed{\text{total work}\propto R\times C\times \text{number of timesteps}}
+$$
+If larger grids also require more timesteps to reach convergence, runtime can grow faster than the number of cells alone suggest.
+\\\\
+\textbf{For example:}\\
+In an $N\times N$ grid:
+\begin{itemize}
+    \item doubling $N$ gives 4 times as many cells;
+    \item if it also takes roughly 2 times as many timesteps;
+    \item total work becomes 8 times larger.
+\end{itemize}
+\subsubsection{Two kinds of scaling}
+There are two types of scaling.
+\\\\
+\textbf{Strong sclaing (Amdahl's law):}
+\begin{itemize}
+    \item fixed problem size
+    \item defined as how the solution time varies with the number of processors for a fixed total problem size.
+    \item For example, same task with double the number of processors.
+\end{itemize}
+$\quad$\\
+\textbf{Weak scaling (Gustafson's law):}
+\begin{itemize}
+    \item fixed problem size per processor.
+    \item defined as how the solution time varies with the number of processors for a fixed problem size per processor.
+    \item For example, double the task when you double the number of processors.
+    \item Efficiency:
+$$
+E_P=\frac{\text{time to solve problem size }n\text{ with 1 thread}}{\text{time to solve problem size }n\times P\text{ with }P\text{ threads}}
+$$
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Pictures/pcp_46.png}
+\end{figure}
+
 % COMPUTER ARCHITECTURE
 \section{Computer Architecture}
 \subsection{Introduction}
